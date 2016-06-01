@@ -12,6 +12,13 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
@@ -33,7 +40,7 @@ public class KeywordAnalyzer {
 	private Gson gson; 
 	private LinkedHashMap<String, IRI> exceptionMap;
 	private int counter;
-	
+	private HttpClient client;
 	
 	public KeywordAnalyzer(OWLOntologyManager manager, OWLDataFactory df, OWLOntology ont, 
 			OWLOntology extensions, Gson gson, List<String> stoplist, 
@@ -47,6 +54,7 @@ public class KeywordAnalyzer {
 		this.stoplist = stoplist;
 		this.exceptionMap = exceptionMap;
 		this.nullIRIs = nullIRIs;
+		client = new DefaultHttpClient();
 		counter = 0;
 	}
 
@@ -98,15 +106,45 @@ public class KeywordAnalyzer {
 		}
 	}	
 	
-	public String readUrl(String urlString) throws Exception {
+	public String readURLNew(String urlString) throws ClientProtocolException, IOException
+	{
+		
+		String jsonStr = null;
+	
+		HttpGet httpGet = new HttpGet(urlString);
+		
+		// issue is here? try making HttpGet a private and stop calling new HttpGet because it might be opening new ports
+		httpGet.addHeader("Content-Type", "application/json;charset=utf-8");
+		try {
+		    HttpResponse response = client.execute(httpGet);
+		    
+		    HttpEntity entity = response.getEntity();
+		    if (entity != null) {
+		        jsonStr = EntityUtils.toString(entity);
+		        		        
+		    }
+		    if (response.getStatusLine().getStatusCode() == 404 
+		    		|| response.getStatusLine().getStatusCode() == 406)
+		    {
+		    	jsonStr = null;
+		    }
+		    //System.out.println(jsonStr);
+		    
+		} finally {
+		     httpGet.releaseConnection();
+		}
+		return jsonStr;
+	}
+		
+	public String readUrl(String urlString) throws IOException, InterruptedException {
 		counter++;
 	    BufferedReader reader = null;
 	    try {
-	    	if (counter % 25000 == 0)
+	    	if (counter % 20000 == 0)
 	    	{
 	    		counter = 0;
 	    		System.out.println("waiting for TIME_WAIT");
-	    		Thread.sleep(25000);
+	    		Thread.sleep(500);
 	    	}
 	        URL url = new URL(urlString);
 	        reader = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -130,6 +168,9 @@ public class KeywordAnalyzer {
 		String suffix = "?limit=10&searchSynonyms=true&searchAbbreviations=false&searchAcronyms=false";
 		String urlInput = URLEncoder.encode(input, StandardCharsets.UTF_8.name()).replace("+", "%20");
 	
+		if (input == null)
+			return null;
+		
 		String urlOut = null;
 		if (stoplist.contains(input.toLowerCase()))
 		{
@@ -137,11 +178,12 @@ public class KeywordAnalyzer {
 		}
 		//System.out.println(prefix+urlInput+suffix);
 		try {			
-			urlOut = readUrl(prefix+urlInput+suffix);	
+			urlOut = readURLNew(prefix+urlInput+suffix);	
+			if (urlOut == null)
+				return null;
 		} catch (Exception e) {
 			return null;
 		}
-		
 		Vocab vocab = gson.fromJson(urlOut, Vocab.class);
 		
 		// preliminary check
@@ -216,7 +258,7 @@ public class KeywordAnalyzer {
 		String url = URLEncoder.encode(testInput, StandardCharsets.UTF_8.name());
 		String chunks = "http://tikki.neuinfo.org:9000/scigraph/lexical/chunks?text=";
 		//System.out.println(chunks+url);
-		String json = readUrl(chunks + url);
+		String json = readURLNew(chunks + url);
 		
 	    ArrayList<Keyword> keywords = new ArrayList<Keyword>();
 	    
@@ -347,7 +389,7 @@ public class KeywordAnalyzer {
 	{
 		String prefix = "http://tikki.neuinfo.org:9000/scigraph/lexical/pos?text=";
 		String urlInput = URLEncoder.encode(input, StandardCharsets.UTF_8.name());
-		String urlOut = readUrl(prefix+urlInput);
+		String urlOut = readURLNew(prefix+urlInput);
 		
 		POS[] p = gson.fromJson(urlOut, POS[].class);
 		return p;

@@ -73,18 +73,9 @@ public class Driver {
 		KeywordAnalyzer analyzer = new KeywordAnalyzer(manager, df, cinergi_ont, extensions, gson,
 					stoplist, exceptionMap, nullIRIs);
 		
-	/*	while (true)
-		{
-			try {
-				analyzer.processDocument();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (1 == 2)
-				break;
-			
-		} */
+		
+		//analyzer.readURLNew("http://tikki.neuinfo.org:9000/scigraph/vocabulary/term/adwdaw?limit=20&searchSynonyms=true&searchAbbreviations=false&searchAcronyms=false");
+		//System.out.println(docs.length);
 		analyzer.processDocuments(docs);
 		
 		FileWriter fw = new FileWriter(argv[1]);
