@@ -6,26 +6,26 @@ public class Keyword
 
     private String[] span;
     
-    private String ontID;
+    private String[] ontID;
 
-    private String facet;
+    private String[] facets;
     
-    public String getFacet ()
+    public String[] getFacet ()
     {
-        return facet;
+        return facets;
     }
 
-    public void setFacet (String facet)
+    public void setFacet (String[] facets)
     {
-        this.facet = facet;
+        this.facets = facets;
     }
 
-    public String getOntID ()
+    public String[] getOntID ()
     {
         return ontID;
     }
 
-    public void setOntID (String ontID)
+    public void setOntID (String[] ontID)
     {
         this.ontID = ontID;
     }
@@ -50,9 +50,9 @@ public class Keyword
         this.span = span;
     }
 
-    public Keyword(String term, String[] span, String ontID, String facet)
+    public Keyword(String term, String[] span, String[] ontID, String[] facets)
     {
-    	setFacet(facet);
+    	setFacet(facets);
     	setOntID(ontID);
     	setSpan(span);
     	setTerm(term);
@@ -61,6 +61,6 @@ public class Keyword
     @Override
     public String toString()
     {
-        return "Keyword [facet = "+facet+", ontID = "+ontID+", term = "+term+", span = "+span+"]";
+        return "Keyword [facet = "+facets+", ontID = "+ontID+", term = "+term+", span = "+span+"]";
     }
 }

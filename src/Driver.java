@@ -8,11 +8,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -72,15 +74,18 @@ public class Driver {
 		
 		KeywordAnalyzer analyzer = new KeywordAnalyzer(manager, df, cinergi_ont, extensions, gson,
 					stoplist, exceptionMap, nullIRIs);
+	//	
+		//OWLClass tempclass = df.getOWLClass(IRI.create("http://www.vocabularyserver.com/usgs/index.php?tema=797&/hydrology"));
 		
+		//IRI temp = analyzer.getFacetIRI(tempclass, new HashSet<IRI>());
+		//System.out.println(temp);
 		
-		//analyzer.readURLNew("http://tikki.neuinfo.org:9000/scigraph/vocabulary/term/adwdaw?limit=20&searchSynonyms=true&searchAbbreviations=false&searchAcronyms=false");
-		//System.out.println(docs.length);
 		analyzer.processDocuments(docs);
 		
 		FileWriter fw = new FileWriter(argv[1]);
 		fw.write(gson.toJson(analyzer.getOutput())); 
 	
 		fw.close();
+		
 	}
 }

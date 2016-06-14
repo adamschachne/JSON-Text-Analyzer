@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -38,17 +41,19 @@ public class OWLFunctions {
 		return false;
 	}
 	
-	public static OWLClass getParentAnnotationClass(OWLClass c, OWLOntology extensionsOntology, OWLDataFactory df) {
+	public static List<OWLClass> getParentAnnotationClass(OWLClass c, OWLOntology extensionsOntology, OWLDataFactory df) {
+		
+		List<OWLClass> cinergiParents = new ArrayList<OWLClass>();
 		
 		for (OWLAnnotation a : c.getAnnotations(extensionsOntology))
 		{
 			if (a.getProperty().equals(df.getOWLAnnotationProperty
 					(IRI.create("http://hydro10.sdsc.edu/cinergi_ontology/cinergiExtensions.owl#cinergiParent"))))
 			{
-				return (df.getOWLClass((IRI)(a.getValue())));
+				cinergiParents.add(df.getOWLClass((IRI)(a.getValue())));
 			}
 		}
-		return null;
+		return cinergiParents;
 	}
 	
 	public static String getLabel(OWLClass c, OWLOntologyManager m, OWLDataFactory df)
@@ -88,7 +93,18 @@ public class OWLFunctions {
 		return a.getValue().equals(df.getOWLLiteral(true));
 	}
 	
-	
+	public static boolean isTopLevelFacet(OWLClass c, OWLOntology extensionsOntology, OWLDataFactory df)
+	{
+		if (hasParentAnnotation( c, extensionsOntology, df))
+		{
+			if (getParentAnnotationClass(c, extensionsOntology, df).get(0).
+					getIRI().equals(IRI.create("http://www.w3.org/2002/07/owl#Thing")))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	

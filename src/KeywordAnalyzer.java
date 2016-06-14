@@ -7,11 +7,13 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -167,34 +169,45 @@ public class KeywordAnalyzer {
 	}
 	
 	// returns the cinegiFacet associated with any class, returns null if there is not one
-	private IRI getFacetIRI(OWLClass cls, HashSet<IRI> visited)
-	{
+	public List<IRI> getFacetIRI(OWLClass cls, HashSet<IRI> visited)
+	{		
 		if (visited.contains(cls.getIRI()))
 		{
+			// the document has already processed this class; stop
 			return null;
 		}
 		visited.add(cls.getIRI());		
 		
-		//System.err.println(cls.getIRI());
-		if (cls.getIRI().equals("http://www.w3.org/2002/07/owl#Thing"))
-			return null;
+		if (cls.getIRI().equals("2 http://www.w3.org/2002/07/owl#Thing"))
+			return null; // if the class is Thing, then stop
 	
 		if (OWLFunctions.hasCinergiFacet(cls, extensions, df))
 		{
-			return cls.getIRI();
+			// if the class is a cinergiFacet already then return itself
+			return new ArrayList<IRI>(Arrays.asList(cls.getIRI()));
 		}		
 		if (OWLFunctions.hasParentAnnotation(cls, extensions ,df))
-		{		        		
-			return getFacetIRI(OWLFunctions.getParentAnnotationClass(cls, extensions, df), visited);							
+		{		    
+			ArrayList<IRI> parentIRIs = new ArrayList<IRI>();
+			for (OWLClass c : OWLFunctions.getParentAnnotationClass(cls, extensions, df))
+			{
+				if (OWLFunctions.isTopLevelFacet(c, extensions, df))
+				{
+					// this class's cinergiParent is a topLevel facet and its not a facet; should be excluded
+					return null; 
+				}
+				parentIRIs.add(c.getIRI());
+			}	
+			return parentIRIs;
 		}			
 		if (!cls.getEquivalentClasses(manager.getOntologies()).isEmpty())
 		{ 			
 
-			for (OWLClassExpression oce : cls.getEquivalentClasses(manager.getOntologies())) // equivalencies
+			for (OWLClassExpression oce : cls.getEquivalentClasses(manager.getOntologies())) // equivalences
 			{
 				if (oce.getClassExpressionType().toString().equals("Class"))
 				{
-					IRI retVal = getFacetIRI(oce.getClassesInSignature().iterator().next(), visited); 
+					List<IRI> retVal = getFacetIRI(oce.getClassesInSignature().iterator().next(), visited); 
 					
 					if (retVal == null)
 						continue;
@@ -215,7 +228,13 @@ public class KeywordAnalyzer {
 					if (OWLFunctions.getLabel(cl, manager, df).equals(OWLFunctions.getLabel(cls, manager, df)))
 						continue; // skip if child of the same class
 					}
-					IRI retVal = getFacetIRI(oce.getClassesInSignature().iterator().next(), visited); 
+					if (OWLFunctions.isTopLevelFacet(cl, extensions, df))
+					{
+						// this class's cinergiParent is a topLevel facet and its not a facet; should be excluded\
+						System.err.println(OWLFunctions.getLabel(cl, manager, df) + " is being excluded; from: " + OWLFunctions.getLabel(cls, manager, df));
+						return null; 
+					}
+					List<IRI> retVal = getFacetIRI(oce.getClassesInSignature().iterator().next(), visited); 
 					
 					if (retVal == null)
 						continue;
@@ -313,7 +332,7 @@ public class KeywordAnalyzer {
 	    }
 		return keywords;	    			 
 	}
-	// takes a token (phrase and span), a reference of keywords to add to, and a 
+	// takes a token from POS service and adds the corresponding keyword to a set
 	private boolean processChunk(Tokens t, ArrayList<Keyword> keywords, HashSet<String> visited) throws Exception {
 		
 		if (visited.contains(t.getToken())) // this token has already been used
@@ -326,7 +345,6 @@ public class KeywordAnalyzer {
 			return false;
 		}		
 		visited.add(t.getToken());
-			
 		Concept toUse = vocab.concepts.get(0); // TODO find the concept that matched the token
 		if (vocab.concepts.size() > 1) 
 		{ // change this later to make use of exceptionMap TODO
@@ -340,27 +358,38 @@ public class KeywordAnalyzer {
 			}
 			if (vocab.concepts.size() == 0) 
 				return false;
-			toUse = vocab.concepts.get(0);
-			
+			toUse = vocab.concepts.get(0);		
 		}
-	
-		HashSet<IRI> visitedIRI = new HashSet<IRI>();
-		
-		
-		
+		if (!t.getToken().equals(t.getToken().toUpperCase()) 
+				&& toUse.labels.get(0).equals(toUse.labels.get(0).toUpperCase()))
+		{
+			// check if the input token is all caps and if the response term is also all caps
+			return false;
+		}
 		OWLClass cls = df.getOWLClass(IRI.create(toUse.uri));	
 		if (toUse.uri.contains("CHEBI") && t.getToken().length() <= 3) // filter chemical entities that cause errors
 		{
 			return false;
 		}
-		IRI facetIRI = getFacetIRI(cls, visitedIRI);
+		
+		HashSet<IRI> visitedIRI = new HashSet<IRI>();
+		List<IRI> facetIRI = getFacetIRI(cls, visitedIRI);		
 		if (facetIRI == null)
 		{	
 			//System.err.println("no facet for: " + toUse.uri);
 			return false;
 		}
-		keywords.add(new Keyword(t.getToken(), new String[] { t.getStart(), t.getEnd() }, facetIRI.toString(), 
-					OWLFunctions.getLabel(df.getOWLClass(facetIRI), manager, df)));
+		ArrayList<String> facetLabels = new ArrayList<String>();
+		ArrayList<String> IRIstr = new ArrayList<String>();
+		
+		for (IRI iri : facetIRI)
+		{		
+			facetLabels.add(OWLFunctions.getLabel(df.getOWLClass(iri), manager, df));
+			IRIstr.add(iri.toString());		
+		}
+		keywords.add(new Keyword(t.getToken(), new String[] { t.getStart(), t.getEnd() }, 
+				IRIstr.toArray(new String[IRIstr.size()]), 
+				facetLabels.toArray(new String[facetLabels.size()])	));
 		
 		return true; // 
 		
