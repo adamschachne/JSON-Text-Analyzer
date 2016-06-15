@@ -11,27 +11,14 @@
           "18"
         ],
         "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000029"
+          "http://sweet.jpl.nasa.gov/2.3/realmHydro.owl#HydrosphereFeature"
         ],
         "facets": [
-          "Watercourse"
+          "Hydrologic Feature, Feature"
         ]
       },
       {
-        "term": "stream",
-        "span": [
-          "41",
-          "58"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000029"
-        ],
-        "facets": [
-          "Watercourse"
-        ]
-      },
-      {
-        "term": "discharge",
+        "term": "Discharge",
         "span": [
           "120",
           "142"
@@ -40,11 +27,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "measurements",
+        "term": "Measurements",
         "span": [
           "120",
           "142"
@@ -54,12 +41,25 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
         ],
         "facets": [
-          "Measure",
-          "Observation"
+          "Measure, Property",
+          "Observation, Activity"
         ]
       },
       {
-        "term": "elevation",
+        "term": "Forest",
+        "span": [
+          "238",
+          "276"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00002297"
+        ],
+        "facets": [
+          "Environmental Feature, Feature"
+        ]
+      },
+      {
+        "term": "Elevation",
         "span": [
           "353",
           "362"
@@ -68,7 +68,7 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
@@ -81,11 +81,11 @@
           "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
         ],
         "facets": [
-          "Earth Science"
+          "Earth Science, Science Domain"
         ]
       },
       {
-        "term": "hydrologic",
+        "term": "Hydrologic",
         "span": [
           "456",
           "506"
@@ -95,12 +95,12 @@
           "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
         ],
         "facets": [
-          "Hydrologic Process",
-          "Earth Science"
+          "Hydrologic Process, Process",
+          "Earth Science, Science Domain"
         ]
       },
       {
-        "term": "watersheds",
+        "term": "Watersheds",
         "span": [
           "511",
           "521"
@@ -109,11 +109,24 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "is converted",
+        "term": "Palm",
+        "span": [
+          "678",
+          "729"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/matrEquipment.owl#Equipment"
+        ],
+        "facets": [
+          "Equipment, Thing"
+        ]
+      },
+      {
+        "term": "Is converted",
         "span": [
           "874",
           "886"
@@ -122,11 +135,11 @@
           "http://www.ebi.ac.uk/swo/SWO_0000001"
         ],
         "facets": [
-          "Software"
+          "Software, Resource Type"
         ]
       },
       {
-        "term": "runoff",
+        "term": "Runoff",
         "span": [
           "890",
           "896"
@@ -135,11 +148,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "other",
+        "term": "Other",
         "span": [
           "983",
           "1001"
@@ -148,11 +161,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
         ],
         "facets": [
-          "Observation"
+          "Observation, Activity"
         ]
       },
       {
-        "term": "lowland",
+        "term": "Lowland",
         "span": [
           "1160",
           "1189"
@@ -161,7 +174,7 @@
           "http://sweet.jpl.nasa.gov/2.3/realm.owl#Geosphere"
         ],
         "facets": [
-          "Geosphere"
+          "Geosphere, Realm"
         ]
       }
     ]
@@ -178,27 +191,14 @@
           "18"
         ],
         "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000029"
+          "http://sweet.jpl.nasa.gov/2.3/realmHydro.owl#HydrosphereFeature"
         ],
         "facets": [
-          "Watercourse"
+          "Hydrologic Feature, Feature"
         ]
       },
       {
-        "term": "stream",
-        "span": [
-          "41",
-          "58"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000029"
-        ],
-        "facets": [
-          "Watercourse"
-        ]
-      },
-      {
-        "term": "discharge",
+        "term": "Discharge",
         "span": [
           "119",
           "141"
@@ -207,11 +207,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "measurements",
+        "term": "Measurements",
         "span": [
           "119",
           "141"
@@ -221,8 +221,8 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
         ],
         "facets": [
-          "Measure",
-          "Observation"
+          "Measure, Property",
+          "Observation, Activity"
         ]
       },
       {
@@ -235,11 +235,24 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "elevation",
+        "term": "Forest",
+        "span": [
+          "239",
+          "277"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00002297"
+        ],
+        "facets": [
+          "Environmental Feature, Feature"
+        ]
+      },
+      {
+        "term": "Elevation",
         "span": [
           "354",
           "363"
@@ -248,7 +261,7 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
@@ -261,11 +274,11 @@
           "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
         ],
         "facets": [
-          "Earth Science"
+          "Earth Science, Science Domain"
         ]
       },
       {
-        "term": "hydrologic",
+        "term": "Hydrologic",
         "span": [
           "457",
           "507"
@@ -275,12 +288,12 @@
           "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
         ],
         "facets": [
-          "Hydrologic Process",
-          "Earth Science"
+          "Hydrologic Process, Process",
+          "Earth Science, Science Domain"
         ]
       },
       {
-        "term": "watersheds",
+        "term": "Watersheds",
         "span": [
           "512",
           "522"
@@ -289,11 +302,24 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "is converted",
+        "term": "Palm",
+        "span": [
+          "679",
+          "730"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/matrEquipment.owl#Equipment"
+        ],
+        "facets": [
+          "Equipment, Thing"
+        ]
+      },
+      {
+        "term": "Is converted",
         "span": [
           "875",
           "887"
@@ -302,11 +328,11 @@
           "http://www.ebi.ac.uk/swo/SWO_0000001"
         ],
         "facets": [
-          "Software"
+          "Software, Resource Type"
         ]
       },
       {
-        "term": "runoff",
+        "term": "Runoff",
         "span": [
           "891",
           "897"
@@ -315,11 +341,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "other",
+        "term": "Other",
         "span": [
           "984",
           "1002"
@@ -328,11 +354,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
         ],
         "facets": [
-          "Observation"
+          "Observation, Activity"
         ]
       },
       {
-        "term": "lowland",
+        "term": "Lowland",
         "span": [
           "1161",
           "1190"
@@ -341,7 +367,7 @@
           "http://sweet.jpl.nasa.gov/2.3/realm.owl#Geosphere"
         ],
         "facets": [
-          "Geosphere"
+          "Geosphere, Realm"
         ]
       }
     ]
@@ -361,7 +387,7 @@
           "http://purl.obolibrary.org/obo/ENVO_00001998"
         ],
         "facets": [
-          "Soil"
+          "Soil, Environmental Material, Material"
         ]
       },
       {
@@ -374,7 +400,7 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
@@ -387,11 +413,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "observation",
+        "term": "Observation",
         "span": [
           "102",
           "124"
@@ -400,11 +426,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
         ],
         "facets": [
-          "Observation"
+          "Observation, Activity"
         ]
       },
       {
-        "term": "water",
+        "term": "Water",
         "span": [
           "128",
           "157"
@@ -413,11 +439,24 @@
           "http://purl.obolibrary.org/obo/ENVO_00010483"
         ],
         "facets": [
-          "Environmental Material"
+          "Environmental Material, Material"
         ]
       },
       {
-        "term": "temperature",
+        "term": "Energy",
+        "span": [
+          "128",
+          "157"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/cinergi#namedProperty"
+        ],
+        "facets": [
+          "Property, Thing"
+        ]
+      },
+      {
+        "term": "Temperature",
         "span": [
           "128",
           "157"
@@ -426,20 +465,7 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
-        ]
-      },
-      {
-        "term": "the soils",
-        "span": [
-          "161",
-          "170"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00001998"
-        ],
-        "facets": [
-          "Soil"
+          "Measure, Property"
         ]
       },
       {
@@ -452,7 +478,7 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/CGI_Lithology#rock_material"
         ],
         "facets": [
-          "Rock Material"
+          "Rock Material, Material"
         ]
       },
       {
@@ -465,11 +491,11 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "watershed",
+        "term": "Watershed",
         "span": [
           "228",
           "237"
@@ -478,11 +504,11 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "is measured",
+        "term": "Is measured",
         "span": [
           "262",
           "273"
@@ -491,24 +517,24 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "potential",
+        "term": "MPS1 probes",
         "span": [
-          "315",
-          "331"
+          "349",
+          "360"
         ],
         "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+          "http://sweet.jpl.nasa.gov/2.3/matrEquipment.owl#Equipment"
         ],
         "facets": [
-          "Measure"
+          "Equipment, Thing"
         ]
       },
       {
-        "term": "frequency",
+        "term": "Frequency",
         "span": [
           "451",
           "473"
@@ -517,11 +543,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "flow",
+        "term": "Flow",
         "span": [
           "477",
           "505"
@@ -530,37 +556,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "soil",
-        "span": [
-          "576",
-          "598"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00001998"
-        ],
-        "facets": [
-          "Soil"
-        ]
-      },
-      {
-        "term": "moisture",
-        "span": [
-          "576",
-          "598"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure"
-        ]
-      },
-      {
-        "term": "precipitation",
+        "term": "Precipitation",
         "span": [
           "602",
           "615"
@@ -569,7 +569,7 @@
           "http://www.semanticweb.org/administrator/ontologies/2015/5/untitled-ontology-4#Atmospheric_Process"
         ],
         "facets": [
-          "Atmospheric Process"
+          "Atmospheric Process, Process"
         ]
       },
       {
@@ -582,11 +582,24 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "carbon",
+        "term": "Subsurface",
+        "span": [
+          "907",
+          "931"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/realm.owl#PlanetaryRealm"
+        ],
+        "facets": [
+          "Realm, Thing"
+        ]
+      },
+      {
+        "term": "Carbon",
         "span": [
           "1057",
           "1112"
@@ -595,7 +608,7 @@
           "http://purl.obolibrary.org/obo/CHEBI_24431"
         ],
         "facets": [
-          "Chemical"
+          "Chemical, Material"
         ]
       },
       {
@@ -609,12 +622,12 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/cinergi.owl/Chemistry"
         ],
         "facets": [
-          "Earth Science",
-          "Chemistry"
+          "Earth Science, Science Domain",
+          "Chemistry, Science Domain"
         ]
       },
       {
-        "term": "hydrological",
+        "term": "Hydrological",
         "span": [
           "1311",
           "1332"
@@ -624,12 +637,12 @@
           "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
         ],
         "facets": [
-          "Hydrologic Process",
-          "Earth Science"
+          "Hydrologic Process, Process",
+          "Earth Science, Science Domain"
         ]
       },
       {
-        "term": "weathering",
+        "term": "Weathering",
         "span": [
           "1336",
           "1346"
@@ -639,21 +652,8 @@
           "http://purl.obolibrary.org/obo/ENVO_01000267"
         ],
         "facets": [
-          "Climatology",
-          "Atmosphere"
-        ]
-      },
-      {
-        "term": "Flow",
-        "span": [
-          "1477",
-          "1500"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure"
+          "Climatology, Science Domain",
+          "Atmosphere, Realm"
         ]
       },
       {
@@ -666,7 +666,7 @@
           "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
         ],
         "facets": [
-          "Instrument"
+          "Instrument, Equipment"
         ]
       },
       {
@@ -679,35 +679,20 @@
           "http://www.vocabularyserver.com/usgs/index.php?tema\u003d796\u0026/hydrologic-processes"
         ],
         "facets": [
-          "Hydrologic Process"
+          "Hydrologic Process, Process"
         ]
       },
       {
-        "term": "Hydrologic",
-        "span": [
-          "1892",
-          "1918"
-        ],
-        "ontID": [
-          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d796\u0026/hydrologic-processes",
-          "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
-        ],
-        "facets": [
-          "Hydrologic Process",
-          "Earth Science"
-        ]
-      },
-      {
-        "term": "catchment",
+        "term": "Forested",
         "span": [
           "2254",
           "2274"
         ],
         "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000191"
+          "http://purl.obolibrary.org/obo/ENVO_00002297"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Environmental Feature, Feature"
         ]
       }
     ]
@@ -727,7 +712,7 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
@@ -740,7 +725,7 @@
           "http://purl.obolibrary.org/obo/ENVO_00001998"
         ],
         "facets": [
-          "Soil"
+          "Soil, Environmental Material, Material"
         ]
       },
       {
@@ -753,11 +738,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "observation",
+        "term": "Observation",
         "span": [
           "102",
           "124"
@@ -766,11 +751,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
         ],
         "facets": [
-          "Observation"
+          "Observation, Activity"
         ]
       },
       {
-        "term": "water",
+        "term": "Water",
         "span": [
           "128",
           "157"
@@ -779,11 +764,24 @@
           "http://purl.obolibrary.org/obo/ENVO_00010483"
         ],
         "facets": [
-          "Environmental Material"
+          "Environmental Material, Material"
         ]
       },
       {
-        "term": "temperature",
+        "term": "Energy",
+        "span": [
+          "128",
+          "157"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/cinergi#namedProperty"
+        ],
+        "facets": [
+          "Property, Thing"
+        ]
+      },
+      {
+        "term": "Temperature",
         "span": [
           "128",
           "157"
@@ -792,20 +790,7 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
-        ]
-      },
-      {
-        "term": "the soils",
-        "span": [
-          "161",
-          "170"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00001998"
-        ],
-        "facets": [
-          "Soil"
+          "Measure, Property"
         ]
       },
       {
@@ -818,7 +803,7 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/CGI_Lithology#rock_material"
         ],
         "facets": [
-          "Rock Material"
+          "Rock Material, Material"
         ]
       },
       {
@@ -831,11 +816,11 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "watershed",
+        "term": "Watershed",
         "span": [
           "228",
           "237"
@@ -844,11 +829,11 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "is measured",
+        "term": "Is measured",
         "span": [
           "262",
           "273"
@@ -857,20 +842,7 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
-        ]
-      },
-      {
-        "term": "conductivity",
-        "span": [
-          "314",
-          "335"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
@@ -883,11 +855,11 @@
           "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
         ],
         "facets": [
-          "Instrument"
+          "Instrument, Equipment"
         ]
       },
       {
-        "term": "frequency",
+        "term": "Frequency",
         "span": [
           "668",
           "690"
@@ -896,11 +868,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "flow",
+        "term": "Flow",
         "span": [
           "694",
           "722"
@@ -909,37 +881,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "soil",
-        "span": [
-          "793",
-          "815"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00001998"
-        ],
-        "facets": [
-          "Soil"
-        ]
-      },
-      {
-        "term": "moisture",
-        "span": [
-          "793",
-          "815"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure"
-        ]
-      },
-      {
-        "term": "precipitation",
+        "term": "Precipitation",
         "span": [
           "819",
           "832"
@@ -948,7 +894,7 @@
           "http://www.semanticweb.org/administrator/ontologies/2015/5/untitled-ontology-4#Atmospheric_Process"
         ],
         "facets": [
-          "Atmospheric Process"
+          "Atmospheric Process, Process"
         ]
       },
       {
@@ -961,11 +907,24 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "carbon",
+        "term": "Subsurface",
+        "span": [
+          "1124",
+          "1148"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/realm.owl#PlanetaryRealm"
+        ],
+        "facets": [
+          "Realm, Thing"
+        ]
+      },
+      {
+        "term": "Carbon",
         "span": [
           "1274",
           "1329"
@@ -974,7 +933,7 @@
           "http://purl.obolibrary.org/obo/CHEBI_24431"
         ],
         "facets": [
-          "Chemical"
+          "Chemical, Material"
         ]
       },
       {
@@ -988,12 +947,12 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/cinergi.owl/Chemistry"
         ],
         "facets": [
-          "Earth Science",
-          "Chemistry"
+          "Earth Science, Science Domain",
+          "Chemistry, Science Domain"
         ]
       },
       {
-        "term": "hydrological",
+        "term": "Hydrological",
         "span": [
           "1528",
           "1549"
@@ -1003,12 +962,12 @@
           "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
         ],
         "facets": [
-          "Hydrologic Process",
-          "Earth Science"
+          "Hydrologic Process, Process",
+          "Earth Science, Science Domain"
         ]
       },
       {
-        "term": "weathering",
+        "term": "Weathering",
         "span": [
           "1553",
           "1563"
@@ -1018,21 +977,8 @@
           "http://purl.obolibrary.org/obo/ENVO_01000267"
         ],
         "facets": [
-          "Climatology",
-          "Atmosphere"
-        ]
-      },
-      {
-        "term": "Flow",
-        "span": [
-          "1694",
-          "1717"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure"
+          "Climatology, Science Domain",
+          "Atmosphere, Realm"
         ]
       },
       {
@@ -1045,7 +991,7 @@
           "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
         ],
         "facets": [
-          "Instrument"
+          "Instrument, Equipment"
         ]
       },
       {
@@ -1058,35 +1004,20 @@
           "http://www.vocabularyserver.com/usgs/index.php?tema\u003d796\u0026/hydrologic-processes"
         ],
         "facets": [
-          "Hydrologic Process"
+          "Hydrologic Process, Process"
         ]
       },
       {
-        "term": "Hydrologic",
-        "span": [
-          "2109",
-          "2135"
-        ],
-        "ontID": [
-          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d796\u0026/hydrologic-processes",
-          "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
-        ],
-        "facets": [
-          "Hydrologic Process",
-          "Earth Science"
-        ]
-      },
-      {
-        "term": "catchment",
+        "term": "Forested",
         "span": [
           "2471",
           "2491"
         ],
         "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000191"
+          "http://purl.obolibrary.org/obo/ENVO_00002297"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Environmental Feature, Feature"
         ]
       }
     ]
@@ -1106,7 +1037,7 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/CGI_Lithology#rock_material"
         ],
         "facets": [
-          "Rock Material"
+          "Rock Material, Material"
         ]
       },
       {
@@ -1119,7 +1050,7 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
@@ -1133,8 +1064,8 @@
           "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
         ],
         "facets": [
-          "Hydrologic Process",
-          "Earth Science"
+          "Hydrologic Process, Process",
+          "Earth Science, Science Domain"
         ]
       },
       {
@@ -1147,24 +1078,24 @@
           "http://www.semanticweb.org/administrator/ontologies/2015/5/untitled-ontology-4#Atmospheric_Process"
         ],
         "facets": [
-          "Atmospheric Process"
+          "Atmospheric Process, Process"
         ]
       },
       {
-        "term": "precipitation",
+        "term": "Field",
         "span": [
-          "69",
-          "111"
+          "136",
+          "158"
         ],
         "ontID": [
-          "http://www.semanticweb.org/administrator/ontologies/2015/5/untitled-ontology-4#Atmospheric_Process"
+          "http://purl.obolibrary.org/obo/ENVO_00002297"
         ],
         "facets": [
-          "Atmospheric Process"
+          "Environmental Feature, Feature"
         ]
       },
       {
-        "term": "observations",
+        "term": "Observations",
         "span": [
           "136",
           "158"
@@ -1173,11 +1104,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
         ],
         "facets": [
-          "Observation"
+          "Observation, Activity"
         ]
       },
       {
-        "term": "rain",
+        "term": "Rain",
         "span": [
           "164",
           "216"
@@ -1186,11 +1117,50 @@
           "http://www.semanticweb.org/administrator/ontologies/2015/5/untitled-ontology-4#Atmospheric_Process"
         ],
         "facets": [
-          "Atmospheric Process"
+          "Atmospheric Process, Process"
         ]
       },
       {
-        "term": "a height",
+        "term": "Gauge",
+        "span": [
+          "164",
+          "216"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/matrEquipment.owl#Equipment"
+        ],
+        "facets": [
+          "Equipment, Thing"
+        ]
+      },
+      {
+        "term": "Gap",
+        "span": [
+          "283",
+          "286"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/realm.owl#Realm"
+        ],
+        "facets": [
+          "Feature, Thing"
+        ]
+      },
+      {
+        "term": "Laser",
+        "span": [
+          "328",
+          "387"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/matrEquipment.owl#Equipment"
+        ],
+        "facets": [
+          "Equipment, Thing"
+        ]
+      },
+      {
+        "term": "A height",
         "span": [
           "574",
           "582"
@@ -1199,11 +1169,24 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "ridge",
+        "term": "LPM",
+        "span": [
+          "631",
+          "653"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/matrEquipment.owl#Equipment"
+        ],
+        "facets": [
+          "Equipment, Thing"
+        ]
+      },
+      {
+        "term": "Ridge",
         "span": [
           "708",
           "726"
@@ -1212,7 +1195,7 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       }
     ]
@@ -1229,27 +1212,14 @@
           "18"
         ],
         "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000029"
+          "http://sweet.jpl.nasa.gov/2.3/realmHydro.owl#HydrosphereFeature"
         ],
         "facets": [
-          "Watercourse"
+          "Hydrologic Feature, Feature"
         ]
       },
       {
-        "term": "stream",
-        "span": [
-          "41",
-          "66"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000029"
-        ],
-        "facets": [
-          "Watercourse"
-        ]
-      },
-      {
-        "term": "discharge",
+        "term": "Discharge",
         "span": [
           "119",
           "141"
@@ -1258,11 +1228,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "measurements",
+        "term": "Measurements",
         "span": [
           "119",
           "141"
@@ -1272,12 +1242,25 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
         ],
         "facets": [
-          "Measure",
-          "Observation"
+          "Measure, Property",
+          "Observation, Activity"
         ]
       },
       {
-        "term": "elevation",
+        "term": "Forest",
+        "span": [
+          "237",
+          "275"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00002297"
+        ],
+        "facets": [
+          "Environmental Feature, Feature"
+        ]
+      },
+      {
+        "term": "Elevation",
         "span": [
           "352",
           "361"
@@ -1286,7 +1269,7 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
@@ -1299,11 +1282,11 @@
           "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
         ],
         "facets": [
-          "Earth Science"
+          "Earth Science, Science Domain"
         ]
       },
       {
-        "term": "hydrologic",
+        "term": "Hydrologic",
         "span": [
           "455",
           "505"
@@ -1313,12 +1296,12 @@
           "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
         ],
         "facets": [
-          "Hydrologic Process",
-          "Earth Science"
+          "Hydrologic Process, Process",
+          "Earth Science, Science Domain"
         ]
       },
       {
-        "term": "watersheds",
+        "term": "Watersheds",
         "span": [
           "510",
           "520"
@@ -1327,11 +1310,24 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "is converted",
+        "term": "Palm",
+        "span": [
+          "677",
+          "728"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/matrEquipment.owl#Equipment"
+        ],
+        "facets": [
+          "Equipment, Thing"
+        ]
+      },
+      {
+        "term": "Is converted",
         "span": [
           "873",
           "885"
@@ -1340,11 +1336,11 @@
           "http://www.ebi.ac.uk/swo/SWO_0000001"
         ],
         "facets": [
-          "Software"
+          "Software, Resource Type"
         ]
       },
       {
-        "term": "runoff",
+        "term": "Runoff",
         "span": [
           "889",
           "895"
@@ -1353,11 +1349,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "other",
+        "term": "Other",
         "span": [
           "982",
           "1000"
@@ -1366,11 +1362,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
         ],
         "facets": [
-          "Observation"
+          "Observation, Activity"
         ]
       },
       {
-        "term": "lowland",
+        "term": "Lowland",
         "span": [
           "1159",
           "1188"
@@ -1379,7 +1375,7 @@
           "http://sweet.jpl.nasa.gov/2.3/realm.owl#Geosphere"
         ],
         "facets": [
-          "Geosphere"
+          "Geosphere, Realm"
         ]
       }
     ]
@@ -1399,7 +1395,7 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
@@ -1412,7 +1408,7 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
@@ -1425,7 +1421,7 @@
           "http://purl.obolibrary.org/obo/ENVO_00001998"
         ],
         "facets": [
-          "Soil"
+          "Soil, Environmental Material, Material"
         ]
       },
       {
@@ -1438,24 +1434,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "watersheds",
-        "span": [
-          "132",
-          "147"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000191"
-        ],
-        "facets": [
-          "Physiographic Feature"
-        ]
-      },
-      {
-        "term": "the slope",
+        "term": "The slope",
         "span": [
           "254",
           "263"
@@ -1464,11 +1447,11 @@
           "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Physiographic Feature"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "measurements",
+        "term": "Measurements",
         "span": [
           "277",
           "303"
@@ -1478,12 +1461,12 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
         ],
         "facets": [
-          "Measure",
-          "Observation"
+          "Measure, Property",
+          "Observation, Activity"
         ]
       },
       {
-        "term": "specific conductance",
+        "term": "Specific conductance",
         "span": [
           "307",
           "327"
@@ -1492,39 +1475,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "These measurements",
-        "span": [
-          "355",
-          "373"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure",
-          "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
-        ],
-        "facets": [
-          "Measure",
-          "Observation"
-        ]
-      },
-      {
-        "term": "soil",
-        "span": [
-          "550",
-          "575"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00001998"
-        ],
-        "facets": [
-          "Soil"
-        ]
-      },
-      {
-        "term": "moisture",
+        "term": "Moisture",
         "span": [
           "609",
           "645"
@@ -1533,11 +1488,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "changes",
+        "term": "Changes",
         "span": [
           "685",
           "706"
@@ -1546,11 +1501,11 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "conductivity",
+        "term": "Conductivity",
         "span": [
           "809",
           "847"
@@ -1559,230 +1514,20 @@
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Measure"
+          "Measure, Property"
         ]
       },
       {
-        "term": "the watersheds",
+        "term": "RANGE",
         "span": [
-          "980",
-          "994"
+          "1079",
+          "1098"
         ],
         "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000191"
+          "http://sweet.jpl.nasa.gov/2.3/realm.owl#Realm"
         ],
         "facets": [
-          "Physiographic Feature"
-        ]
-      },
-      {
-        "term": "Measurements",
-        "span": [
-          "1100",
-          "1112"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure",
-          "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
-        ],
-        "facets": [
-          "Measure",
-          "Observation"
-        ]
-      }
-    ]
-  },
-  {
-    "abstract": "The flux tower is located in the Jemez River basin of the Jemez Mountains in north-central New Mexico at the southern margin of the Rocky Mountain ecoregion in the Valles Caldera National Preserve. The climate can be characterized as semi-arid, montane. Vegetation at this site is composed of a Pinus ponderosa overstory with Gambel oak scrubland (Quercus gambelii) understory. Tower height is 25 m. CITATION:  PUBLICATIONS: [1] McDowell, N.G., White, S., Pockman, W.T. 2008. Transpiration and stomatal conductance across a steep climate gradient in the southern Rocky Mountains. Ecohydrology 1:3 193-204.[2] Anderson-Teixera, DeLong, J.P., Fox, A., Brese, D.A. and Litvak, M.E. 2011.  Differential responses of production and respiration to temperature and moisture drive the carbon balance across a climatic gradient in New Mexico.  Global Change Biology 17: 410-424.",
-    "id": "http://www.czo.arizona.edu/data/pub/valle/Towers/Vcp/Tower_Vcp_metadata_2009.hdr",
-    "title": "Valles Caldera Ponderosa Pine Flux Tower.",
-    "keywords": [
-      {
-        "term": "Caldera",
-        "span": [
-          "0",
-          "40"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000191"
-        ],
-        "facets": [
-          "Physiographic Feature"
-        ]
-      },
-      {
-        "term": "The flux tower",
-        "span": [
-          "43",
-          "57"
-        ],
-        "ontID": [
-          "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
-        ],
-        "facets": [
-          "Instrument"
-        ]
-      },
-      {
-        "term": "River",
-        "span": [
-          "72",
-          "93"
-        ],
-        "ontID": [
-          "http://sweet.jpl.nasa.gov/2.3/realmHydro.owl#HydrosphereFeature"
-        ],
-        "facets": [
-          "Hydrologic Feature"
-        ]
-      },
-      {
-        "term": "Mountains",
-        "span": [
-          "97",
-          "116"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000191"
-        ],
-        "facets": [
-          "Physiographic Feature"
-        ]
-      },
-      {
-        "term": "Mountain",
-        "span": [
-          "171",
-          "199"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000191"
-        ],
-        "facets": [
-          "Physiographic Feature"
-        ]
-      },
-      {
-        "term": "The climate",
-        "span": [
-          "242",
-          "253"
-        ],
-        "ontID": [
-          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d276\u0026/climatology",
-          "http://purl.obolibrary.org/obo/ENVO_01000267"
-        ],
-        "facets": [
-          "Climatology",
-          "Atmosphere"
-        ]
-      },
-      {
-        "term": "height",
-        "span": [
-          "424",
-          "436"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure"
-        ]
-      },
-      {
-        "term": "climate",
-        "span": [
-          "570",
-          "594"
-        ],
-        "ontID": [
-          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d276\u0026/climatology",
-          "http://purl.obolibrary.org/obo/ENVO_01000267"
-        ],
-        "facets": [
-          "Climatology",
-          "Atmosphere"
-        ]
-      },
-      {
-        "term": "Ecohydrology",
-        "span": [
-          "629",
-          "653"
-        ],
-        "ontID": [
-          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d796\u0026/hydrologic-processes",
-          "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
-        ],
-        "facets": [
-          "Hydrologic Process",
-          "Earth Science"
-        ]
-      },
-      {
-        "term": "temperature",
-        "span": [
-          "792",
-          "822"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure"
-        ]
-      },
-      {
-        "term": "moisture",
-        "span": [
-          "792",
-          "822"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure"
-        ]
-      },
-      {
-        "term": "carbon",
-        "span": [
-          "823",
-          "841"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/CHEBI_24431"
-        ],
-        "facets": [
-          "Chemical"
-        ]
-      },
-      {
-        "term": "Change",
-        "span": [
-          "885",
-          "909"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure"
-        ]
-      },
-      {
-        "term": "Biology",
-        "span": [
-          "885",
-          "909"
-        ],
-        "ontID": [
-          "http://edamontology.org/topic_3070"
-        ],
-        "facets": [
-          "Biology"
+          "Feature, Thing"
         ]
       }
     ]

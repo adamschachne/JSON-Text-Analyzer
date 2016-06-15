@@ -68,8 +68,8 @@ public class KeywordAnalyzer {
 
 		String text = doc.getTitle() + " " + doc.getText();		
 		
-		System.out.println("processing: " + doc.getTitle());
-		
+		//System.out.println("processing: " + doc.getTitle());
+		long before = System.currentTimeMillis();
 		ArrayList<Keyword> keywords = new ArrayList<Keyword>();
 		HashSet<String> visited = new HashSet<String>();
 		try {
@@ -77,14 +77,14 @@ public class KeywordAnalyzer {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}		
-			
 		if (!keywords.isEmpty())
 		{	
 			addDocumentToOutput(doc, keywords.toArray(new Keyword[keywords.size()]));
+			//System.err.println("time to process document: " + (System.currentTimeMillis() - before) + " number of keywords: " + keywords.size());
 		}
 		else
 		{
-			System.err.println(doc.getTitle() + ": " + "no keywords");
+			//System.err.println(doc.getTitle() + ": " + "no keywords");
 		}
 	}
 
@@ -113,9 +113,7 @@ public class KeywordAnalyzer {
 		
 		String jsonStr = null;
 	
-		HttpGet httpGet = new HttpGet(urlString);
-		
-		// issue is here? try making HttpGet a private and stop calling new HttpGet because it might be opening new ports
+		HttpGet httpGet = new HttpGet(urlString);		
 		httpGet.addHeader("Content-Type", "application/json;charset=utf-8");
 		try {
 		    HttpResponse response = client.execute(httpGet);
@@ -130,7 +128,6 @@ public class KeywordAnalyzer {
 		    {
 		    	jsonStr = null;
 		    }
-		    //System.out.println(jsonStr);
 		    
 		} finally {
 		     httpGet.releaseConnection();
@@ -152,7 +149,6 @@ public class KeywordAnalyzer {
 		{
 			return null;
 		}
-		//System.out.println(prefix+urlInput+suffix);
 		try {			
 			urlOut = readURL(prefix+urlInput+suffix);	
 			if (urlOut == null)
@@ -169,16 +165,16 @@ public class KeywordAnalyzer {
 	}
 	
 	// returns the cinegiFacet associated with any class, returns null if there is not one
-	public List<IRI> getFacetIRI(OWLClass cls, HashSet<IRI> visited)
+	private List<IRI> getFacetIRI(OWLClass cls, HashSet<IRI> visited)
 	{		
 		if (visited.contains(cls.getIRI()))
 		{
-			// the document has already processed this class; stop
+			// prevent infinite loops
 			return null;
 		}
 		visited.add(cls.getIRI());		
 		
-		if (cls.getIRI().equals("2 http://www.w3.org/2002/07/owl#Thing"))
+		if (cls.getIRI().equals("http://www.w3.org/2002/07/owl#Thing"))
 			return null; // if the class is Thing, then stop
 	
 		if (OWLFunctions.hasCinergiFacet(cls, extensions, df))
@@ -191,18 +187,18 @@ public class KeywordAnalyzer {
 			ArrayList<IRI> parentIRIs = new ArrayList<IRI>();
 			for (OWLClass c : OWLFunctions.getParentAnnotationClass(cls, extensions, df))
 			{
-				if (OWLFunctions.isTopLevelFacet(c, extensions, df))
+			/*	if (OWLFunctions.isTopLevelFacet(c, extensions, df))
 				{
+					System.err.println("debug here");
 					// this class's cinergiParent is a topLevel facet and its not a facet; should be excluded
 					return null; 
 				}
-				parentIRIs.add(c.getIRI());
+			*/	parentIRIs.addAll(getFacetIRI(c, visited));   
 			}	
 			return parentIRIs;
 		}			
 		if (!cls.getEquivalentClasses(manager.getOntologies()).isEmpty())
 		{ 			
-
 			for (OWLClassExpression oce : cls.getEquivalentClasses(manager.getOntologies())) // equivalences
 			{
 				if (oce.getClassExpressionType().toString().equals("Class"))
@@ -215,8 +211,7 @@ public class KeywordAnalyzer {
 					return retVal;	
 				}	 
 			}
-		}
-		
+		}		
 		if (!cls.getSuperClasses(manager.getOntologies()).isEmpty())
 		{
 			for (OWLClassExpression oce : cls.getSuperClasses(manager.getOntologies())) // subClassOf
@@ -228,12 +223,12 @@ public class KeywordAnalyzer {
 					if (OWLFunctions.getLabel(cl, manager, df).equals(OWLFunctions.getLabel(cls, manager, df)))
 						continue; // skip if child of the same class
 					}
-					if (OWLFunctions.isTopLevelFacet(cl, extensions, df))
+				/*	if (OWLFunctions.isTopLevelFacet(cl, extensions, df))
 					{
 						// this class's cinergiParent is a topLevel facet and its not a facet; should be excluded\
-						System.err.println(OWLFunctions.getLabel(cl, manager, df) + " is being excluded; from: " + OWLFunctions.getLabel(cls, manager, df));
+						//System.err.println(OWLFunctions.getLabel(cl, manager, df) + " is being excluded; from: " + OWLFunctions.getLabel(cls, manager, df));
 						return null; 
-					}
+					} */
 					List<IRI> retVal = getFacetIRI(oce.getClassesInSignature().iterator().next(), visited); 
 					
 					if (retVal == null)
@@ -245,14 +240,36 @@ public class KeywordAnalyzer {
 		}
 		return null;
 	}
+	
+	// given a (2nd level) cinergiFacet, returns a string of path facet2, facet1
+	private String facetPath(OWLClass cls)
+	{
+		if (OWLFunctions.getParentAnnotationClass(cls, extensions, df).size() == 0)
+		{
+			System.err.println(OWLFunctions.getLabel(cls, manager, df) + " has no cinergiParent, terminating.");
+			return "";
+			//return null;
+		}
+		OWLClass cinergiParent = OWLFunctions.getParentAnnotationClass(cls, extensions, df).get(0);
+		if (OWLFunctions.isTopLevelFacet(cinergiParent, extensions, df) || 
+				cinergiParent.getIRI().equals(IRI.create("http://www.w3.org/2002/07/owl#Thing")))
+		{
+			return (OWLFunctions.getLabel(cls, manager, df) + ", " + OWLFunctions.getLabel(cinergiParent, manager, df));
+		}
+		else
+		{
+			return (OWLFunctions.getLabel(cls,  manager, df) + ", " + facetPath(cinergiParent));
+		} 
+	}
 
 	private ArrayList<Keyword> process(String testInput, HashSet<String> visited) throws Exception
 	{
 		String url = URLEncoder.encode(testInput, StandardCharsets.UTF_8.name());
 		String chunks = "http://tikki.neuinfo.org:9000/scigraph/lexical/chunks?text=";
 		//System.out.println(chunks+url);
+		//long time = System.currentTimeMillis();
 		String json = readURL(chunks + url);
-		
+		//System.err.println("time to read url: " + (System.currentTimeMillis()-time));
 	    ArrayList<Keyword> keywords = new ArrayList<Keyword>();
 	    
 	    // each result from chunking
@@ -260,12 +277,10 @@ public class KeywordAnalyzer {
 	
 	    for (Tokens tok : tokens) // each chunk t
 	    {
-	    	boolean used = false;
+	    	//long time = System.currentTimeMillis();
 	    	if (processChunk(tok, keywords, visited) == true)
-	    	{
-	    		used = true;
 	    		continue;
-	    	}
+	    	
 	    	POS[] parts = pos(gson, tok.getToken());
 	    	
 	    	for (POS p : parts)
@@ -285,7 +300,8 @@ public class KeywordAnalyzer {
 		    			Tokens tempToken = new Tokens(substr[0]+" "+substr[1]);
 		    			if (processChunk(tempToken, keywords, visited) == true) // see if the phrase with a space replacing the hyphen exists
 		    			{
-		    				used = true;
+		    			//	System.err.println("time to process " + p.token + " :" 
+		    			//			+ (System.currentTimeMillis()-time));
 		    				continue;
 		    			}
 		    		}
@@ -296,36 +312,11 @@ public class KeywordAnalyzer {
 		    			tempToken.setToken(p.token);
 		    			if (processChunk(tempToken, keywords, visited) == true)
 		    			{
-		    				used = true;
+		    			//	System.err.println("time to process " + p.token + " :" 
+		    			//			+ (System.currentTimeMillis()-time));
 		    				continue;
 		    			}
-		    	    	// if the result of vocabulary/term is all caps, ignore it unless the pos search was all caps as well
-		    	    	
-		/*    	    	for (String label : vocab.concepts.get(0).labels) // comparing it to label of concept
-		    	    	{				    	    	 
-			    	    	if (label.equals(p.token))
-			    	    	{
-			    	    		writer.printf("%-60s\t%s\n", t.token, label);
-			    	    		used = true;
-			    	    		break;
-			    	    	}
-			    	    	else if (label.contains(p.token.toUpperCase()) || p.token.toUpperCase().contains(label))
-			    	    	{	
-			    	    		// do nothing since the token was referenced incorrectly
-			    	    		used = true;
-			    	    		break;
-			    	    	}
-		    	    	}
-		    	    	if (!printed)
-		    	    	{	
-		    	    		if (!p.token.toUpperCase().equals(p.token) 
-		    	    				&& !vocab.concepts.get(0).labels.get(0).toUpperCase().equals(vocab.concepts.get(0).labels.get(0))) // last check if token and label are not both caps
-		    	    		{	
-			    	    		writer.printf("%-60s\t%s\n", t.token, vocab.concepts.get(0).labels.get(0));
-			    	    		printed =  true;
-		    	    		}
-		    	    	}
-		    */	    	
+		    	    		
 	    			}    							
     			}
 	    	}
@@ -335,16 +326,16 @@ public class KeywordAnalyzer {
 	// takes a token from POS service and adds the corresponding keyword to a set
 	private boolean processChunk(Tokens t, ArrayList<Keyword> keywords, HashSet<String> visited) throws Exception {
 		
-		if (visited.contains(t.getToken())) // this token has already been used
+	/*	if (visited.contains(t.getToken())) // this token has already been used
 		{
 			return false;
 		}
-		Vocab vocab = vocabTerm(t.getToken());
+	*/	Vocab vocab = vocabTerm(t.getToken());
 		if (vocab == null)
 		{			
 			return false;
 		}		
-		visited.add(t.getToken());
+	//	visited.add(t.getToken());
 		Concept toUse = vocab.concepts.get(0); // TODO find the concept that matched the token
 		if (vocab.concepts.size() > 1) 
 		{ // change this later to make use of exceptionMap TODO
@@ -367,11 +358,22 @@ public class KeywordAnalyzer {
 			return false;
 		}
 		OWLClass cls = df.getOWLClass(IRI.create(toUse.uri));	
+		// check for repeated terms
+		if (visited.contains(cls.getIRI().toString()))
+		{
+			return false;
+		}
+		visited.add(cls.getIRI().toString());
+		
 		if (toUse.uri.contains("CHEBI") && t.getToken().length() <= 3) // filter chemical entities that cause errors
 		{
 			return false;
 		}
-		
+		if (t.getToken().length() <= 2) // any input less than 2 
+		{
+			return false;
+		}
+		// determined the class, now obtain the facet it is associated with
 		HashSet<IRI> visitedIRI = new HashSet<IRI>();
 		List<IRI> facetIRI = getFacetIRI(cls, visitedIRI);		
 		if (facetIRI == null)
@@ -384,14 +386,24 @@ public class KeywordAnalyzer {
 		
 		for (IRI iri : facetIRI)
 		{		
-			facetLabels.add(OWLFunctions.getLabel(df.getOWLClass(iri), manager, df));
+			//facetLabels.add(OWLFunctions.getLabel(df.getOWLClass(iri), manager, df));
+			//System.out.println(t.getToken());
+			facetLabels.add(facetPath(df.getOWLClass(iri)));
 			IRIstr.add(iri.toString());		
 		}
-		keywords.add(new Keyword(t.getToken(), new String[] { t.getStart(), t.getEnd() }, 
+		keywords.add(new Keyword(trimToken(t.getToken()), new String[] { t.getStart(), t.getEnd() }, 
 				IRIstr.toArray(new String[IRIstr.size()]), 
 				facetLabels.toArray(new String[facetLabels.size()])	));
 		
 		return true; // 
+		
+	}
+
+	private String trimToken(String token) {
+		
+		String temp = token.substring(1).replaceAll("([-+.^:,])", "");
+		temp = Character.toUpperCase(token.charAt(0)) + temp;
+		return temp;
 		
 	}
 

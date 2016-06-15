@@ -48,7 +48,6 @@ public class Driver {
 		System.out.println("loading ontology");
 		OWLOntology cinergi_ont = manager.loadOntologyFromOntologyDocument(IRI.create("http://hydro10.sdsc.edu/cinergi_ontology/cinergi.owl"));
 		System.out.println("ontology loaded");
-		
 		OWLOntology extensions = null;
 		for (OWLOntology o : manager.getOntologies())
 		{
@@ -74,11 +73,6 @@ public class Driver {
 		
 		KeywordAnalyzer analyzer = new KeywordAnalyzer(manager, df, cinergi_ont, extensions, gson,
 					stoplist, exceptionMap, nullIRIs);
-	//	
-		//OWLClass tempclass = df.getOWLClass(IRI.create("http://www.vocabularyserver.com/usgs/index.php?tema=797&/hydrology"));
-		
-		//IRI temp = analyzer.getFacetIRI(tempclass, new HashSet<IRI>());
-		//System.out.println(temp);
 		
 		analyzer.processDocuments(docs);
 		
