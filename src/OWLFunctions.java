@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.semanticweb.owlapi.model.IRI;
@@ -16,17 +18,23 @@ import org.semanticweb.owlapi.util.OWLOntologyWalkerVisitor;
 
 public class OWLFunctions {
 	
+	private static Map<OWLClass, String> labelMap = new HashMap<OWLClass, String>();
+	private static Map<OWLClass, Boolean> facetMap = new HashMap<OWLClass, Boolean>();
+	
 	// returns true if the OWLClass is a cinergifacet
 	public static boolean hasCinergiFacet(OWLClass c, OWLOntology o, OWLDataFactory df)
 	{
-		for (OWLAnnotation a : c.getAnnotations(o))
+	/*	if (facetMap.containsKey(c)) // not sure if this will improve time
 		{
-			if (isCinergiFacet(a))
+			return facetMap.get(c);
+		}
+	*/	for (OWLAnnotation a : c.getAnnotations(o,df.getOWLAnnotationProperty
+				(IRI.create("http://hydro10.sdsc.edu/cinergi_ontology/cinergiExtensions.owl#cinergiFacet"))))
+		{
+			if (a.getValue().equals(df.getOWLLiteral(true)))
 			{
-				if (cinergiFacetTrue(a, df))
-				{
-					return true;
-				}
+				facetMap.put(c, true);
+				return true;
 			}
 		}
 		return false;
@@ -62,6 +70,10 @@ public class OWLFunctions {
 	
 	public static String getLabel(OWLClass c, OWLOntologyManager m, OWLDataFactory df)
 	{
+		if (labelMap.containsKey(c))
+		{
+			return labelMap.get(c);
+		}
 		String label = "";
 		for (OWLOntology o : m.getOntologies())
 		{
@@ -83,7 +95,7 @@ public class OWLFunctions {
 				label = ((OWLLiteral)a.getValue()).getLiteral();
 			}
 		}
-		
+		labelMap.put(c, label);
 		return label;		
 	}
 	

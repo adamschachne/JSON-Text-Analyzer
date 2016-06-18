@@ -28,18 +28,6 @@ public class Driver {
 	// argument 0 is input json, argument 1 is output json, argument 2 is stoplist
 	public static void main(String[] argv) throws OWLOntologyCreationException, IOException
 	{
-
-		/*
-		 * load ontology		
-		 * read in json from the input file document by document
-		 * 
-		 * for each document, do POS search on title + text
-		 * find noun phrases and adjectives 
-		 *  
-		 * output annotated keywords into output file
-		 * 
-		 */	
-		
 			
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLDataFactory df = manager.getOWLDataFactory();
@@ -74,12 +62,17 @@ public class Driver {
 		KeywordAnalyzer analyzer = new KeywordAnalyzer(manager, df, cinergi_ont, extensions, gson,
 					stoplist, exceptionMap, nullIRIs);
 		
+
+	//	long time = System.currentTimeMillis();
+	//	System.err.println("processing documents...");
+	
 		analyzer.processDocuments(docs);
+	
+	//	System.out.println("total time: " + (System.currentTimeMillis()-time));
 		
 		FileWriter fw = new FileWriter(argv[1]);
 		fw.write(gson.toJson(analyzer.getOutput())); 
 	
 		fw.close();
-		
 	}
 }

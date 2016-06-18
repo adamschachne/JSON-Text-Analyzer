@@ -84,7 +84,7 @@ public class KeywordAnalyzer {
 		}
 		else
 		{
-			//System.err.println(doc.getTitle() + ": " + "no keywords");
+			System.err.println(doc.getTitle() + ": " + "no keywords");
 		}
 	}
 
@@ -165,7 +165,7 @@ public class KeywordAnalyzer {
 	}
 	
 	// returns the cinegiFacet associated with any class, returns null if there is not one
-	private List<IRI> getFacetIRI(OWLClass cls, HashSet<IRI> visited)
+	public List<IRI> getFacetIRI(OWLClass cls, HashSet<IRI> visited)
 	{		
 		if (visited.contains(cls.getIRI()))
 		{
@@ -179,6 +179,7 @@ public class KeywordAnalyzer {
 	
 		if (OWLFunctions.hasCinergiFacet(cls, extensions, df))
 		{
+			//System.err.println(OWLFunctions.getLabel(cls, manager, df) + "is a cinergi Facet");
 			// if the class is a cinergiFacet already then return itself
 			return new ArrayList<IRI>(Arrays.asList(cls.getIRI()));
 		}		
@@ -246,8 +247,8 @@ public class KeywordAnalyzer {
 	{
 		if (OWLFunctions.getParentAnnotationClass(cls, extensions, df).size() == 0)
 		{
-			System.err.println(OWLFunctions.getLabel(cls, manager, df) + " has no cinergiParent, terminating.");
-			return "";
+			//System.err.println(OWLFunctions.getLabel(cls, manager, df) + " has no cinergiParent, terminating.");
+			return null;
 			//return null;
 		}
 		OWLClass cinergiParent = OWLFunctions.getParentAnnotationClass(cls, extensions, df).get(0);
@@ -326,18 +327,46 @@ public class KeywordAnalyzer {
 	// takes a token from POS service and adds the corresponding keyword to a set
 	private boolean processChunk(Tokens t, ArrayList<Keyword> keywords, HashSet<String> visited) throws Exception {
 		
-	/*	if (visited.contains(t.getToken())) // this token has already been used
-		{
-			return false;
-		}
-	*/	Vocab vocab = vocabTerm(t.getToken());
+		Vocab vocab = vocabTerm(t.getToken());
 		if (vocab == null)
 		{			
 			return false;
 		}		
-	//	visited.add(t.getToken());
-		Concept toUse = vocab.concepts.get(0); // TODO find the concept that matched the token
+		
 		if (vocab.concepts.size() > 1) 
+		{
+			for (int i = 0; i < vocab.concepts.size(); i++)
+			{
+				if (nullIRIs.contains(vocab.concepts.get(i).uri))
+				{
+					vocab.concepts.remove(i);
+					i--;
+				}
+			}	
+		}
+		if (vocab.concepts.size() == 0) 
+			return false;
+		
+		Concept toUse = vocab.concepts.get(0);	// default assignment
+		String closestLabel = toUse.labels.get(0); // default assignment
+		
+		int minDistance = 100;
+		for (Concept conc : vocab.concepts)
+		{
+			for (String label : conc.labels)
+			{
+				// get levelshtein distance between the label and input phrase
+				int tempDist = Levenshtein.distance(label, t.getToken());
+				if (tempDist < minDistance)
+				{
+					toUse = conc; // update the concept
+					closestLabel = label; // update the label
+				}
+			}
+		}
+		
+		//toUse = vocab.concepts.get(0); // TODO find the concept that matched the token
+	/*	if (vocab.concepts.size() > 1) 
 		{ // change this later to make use of exceptionMap TODO
 			for (int i = 0; i < vocab.concepts.size(); i++)
 			{
@@ -351,8 +380,8 @@ public class KeywordAnalyzer {
 				return false;
 			toUse = vocab.concepts.get(0);		
 		}
-		if (!t.getToken().equals(t.getToken().toUpperCase()) 
-				&& toUse.labels.get(0).equals(toUse.labels.get(0).toUpperCase()))
+ 	*/	if (!t.getToken().equals(t.getToken().toUpperCase()) 
+				&& closestLabel.equals(closestLabel.toUpperCase()))
 		{
 			// check if the input token is all caps and if the response term is also all caps
 			return false;
@@ -364,12 +393,13 @@ public class KeywordAnalyzer {
 			return false;
 		}
 		visited.add(cls.getIRI().toString());
-		
-		if (toUse.uri.contains("CHEBI") && t.getToken().length() <= 3) // filter chemical entities that cause errors
+
+		// filter chemical entities that cause errors and any input less than 2
+		if (toUse.uri.contains("CHEBI") && t.getToken().length() <= 3) 
 		{
 			return false;
 		}
-		if (t.getToken().length() <= 2) // any input less than 2 
+		if (t.getToken().length() <= 2)
 		{
 			return false;
 		}
@@ -391,12 +421,27 @@ public class KeywordAnalyzer {
 			facetLabels.add(facetPath(df.getOWLClass(iri)));
 			IRIstr.add(iri.toString());		
 		}
-		keywords.add(new Keyword(trimToken(t.getToken()), new String[] { t.getStart(), t.getEnd() }, 
+		keywords.add(new Keyword(/*trimToken(t.getToken())*/toCamelCase(closestLabel),
+					new String[] { t.getStart(), t.getEnd() }, 
 				IRIstr.toArray(new String[IRIstr.size()]), 
 				facetLabels.toArray(new String[facetLabels.size()])	));
 		
 		return true; // 
 		
+	}
+
+	private String toCamelCase(String label) {
+		String returnLabel = "" + Character.toUpperCase(label.charAt(0));
+		for (int i = 1; i < label.length(); i++)
+		{
+			char c = label.charAt(i);
+			if (label.charAt(i-1) == ' ')
+			{
+				returnLabel += Character.toUpperCase(c);
+			}
+			else returnLabel += c;
+		}
+		return returnLabel;
 	}
 
 	private String trimToken(String token) {

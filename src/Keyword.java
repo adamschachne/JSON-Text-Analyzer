@@ -1,7 +1,6 @@
 
 public class Keyword
 {
-
     private String term;
 
     private String[] span;
