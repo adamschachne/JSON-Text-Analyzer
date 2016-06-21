@@ -194,7 +194,10 @@ public class KeywordAnalyzer {
 					// this class's cinergiParent is a topLevel facet and its not a facet; should be excluded
 					return null; 
 				}
-			*/	parentIRIs.addAll(getFacetIRI(c, visited));   
+			*/  List<IRI> parentFacet = getFacetIRI(c, visited);
+				if (parentFacet == null)
+					return null;
+				parentIRIs.addAll(parentFacet);   
 			}	
 			return parentIRIs;
 		}			
@@ -243,7 +246,7 @@ public class KeywordAnalyzer {
 	}
 	
 	// given a (2nd level) cinergiFacet, returns a string of path facet2, facet1
-	private String facetPath(OWLClass cls)
+	public String facetPath(OWLClass cls)
 	{
 		if (OWLFunctions.getParentAnnotationClass(cls, extensions, df).size() == 0)
 		{
@@ -365,28 +368,17 @@ public class KeywordAnalyzer {
 			}
 		}
 		
-		//toUse = vocab.concepts.get(0); // TODO find the concept that matched the token
-	/*	if (vocab.concepts.size() > 1) 
-		{ // change this later to make use of exceptionMap TODO
-			for (int i = 0; i < vocab.concepts.size(); i++)
-			{
-				if (nullIRIs.contains(vocab.concepts.get(i).uri))
-				{
-					vocab.concepts.remove(i);
-					i--;
-				}
-			}
-			if (vocab.concepts.size() == 0) 
-				return false;
-			toUse = vocab.concepts.get(0);		
-		}
- 	*/	if (!t.getToken().equals(t.getToken().toUpperCase()) 
+		if (!t.getToken().equals(t.getToken().toUpperCase()) 
 				&& closestLabel.equals(closestLabel.toUpperCase()))
 		{
 			// check if the input token is all caps and if the response term is also all caps
 			return false;
 		}
-		OWLClass cls = df.getOWLClass(IRI.create(toUse.uri));	
+		OWLClass cls = df.getOWLClass(IRI.create(toUse.uri));
+		
+		// debug
+		System.err.println(t.getToken() + "  " + cls.getIRI());
+		
 		// check for repeated terms
 		if (visited.contains(cls.getIRI().toString()))
 		{
