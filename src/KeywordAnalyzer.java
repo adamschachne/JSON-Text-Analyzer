@@ -384,11 +384,6 @@ public class KeywordAnalyzer {
 			}
 		}
 		
-		if (t.getToken().equals("Radar"))
-		{
-			System.err.println("using: " + toUse.uri);
-		}
-		
 		if (!t.getToken().equals(t.getToken().toUpperCase()) 
 				&& closestLabel.equals(closestLabel.toUpperCase()))
 		{
