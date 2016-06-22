@@ -33,7 +33,7 @@ public class OWLFunctions {
 		{
 			if (a.getValue().equals(df.getOWLLiteral(true)))
 			{
-				facetMap.put(c, true);
+				//facetMap.put(c, true);
 				return true;
 			}
 		}

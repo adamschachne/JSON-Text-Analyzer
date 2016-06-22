@@ -1,7 +1,7 @@
 [
   {
-    "id": "https://www.sas.upenn.edu/lczodata/sites/www.sas.upenn.edu.lczodata/files/Quebreda Q3 5 min 1-8-10 to 12-12-11.hdr",
-    "abstract": "This data set was acquired with a Sippican T-5 XBT Expendable Probe during Marcus G. Langseth expedition MGL0807 conducted in 2008 (Chief Scientist: Dr. W. Steven Holbrook). These data files are of Sippican MK21 Export Data File format and include Sound Velocity and Temperature data that have not been processed. Data were acquired as part of the project(s): Collaborative Research: Seismic measurements of magma flux, arc composition, and lower-plate serpentinization in the Central American subduction factory and TICO-CAVA, 2008 Leg 2, and funding was provided by NSF grant(s): OCE04-05556, OCE04-05572, OCE04-05608, OCE04-05654, OCE05-20378, and OCE06-25178.",
-    "title": "Raw XBT Expendable Probe Data from the Central America Subduction Zone acquired during the Marcus G. Langseth expedition MGL0807 (2008)"
+    "id": "http://www.czo.arizona.edu/data/pub/valle/Towers/Vcp/Tower_Vcp_metadata_2009.hdr (CZO_Datasets)",
+    "abstract": "The flux tower is located in the Jemez River basin of the Jemez Mountains in north-central New Mexico at the southern margin of the Rocky Mountain ecoregion in the Valles Caldera National Preserve. The climate can be characterized as semi-arid, montane. Vegetation at this site is composed of a Pinus ponderosa overstory with Gambel oak scrubland (Quercus gambelii) understory. Tower height is 25 m. Friction velocity, Temperature, Wind direction, Wind speed, Carbon dioxide flux, Sensible heat flux, Latent heat flux, Precipitation, Relative humidity, Barometric pressure, Carbon dioxide, Vapor pressure deficit, Volumetric water content, Radiation net, Radiation incoming PAR, Radiation incoming shortwave, Radiation outgoing shortwave, Radiation incoming longwave, Radiation outgoing longwave, Water vapor concentration, Ecosystem respiration, Gross primary productivity. Radio Detection and Ranging. Expedition",
+    "title": "Valles Caldera Ponderosa Pine Flux Tower."
   }
 ]

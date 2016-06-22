@@ -176,13 +176,27 @@ public class KeywordAnalyzer {
 		
 		if (cls.getIRI().equals("http://www.w3.org/2002/07/owl#Thing"))
 			return null; // if the class is Thing, then stop
-	
+		
 		if (OWLFunctions.hasCinergiFacet(cls, extensions, df))
 		{
 			//System.err.println(OWLFunctions.getLabel(cls, manager, df) + "is a cinergi Facet");
 			// if the class is a cinergiFacet already then return itself
 			return new ArrayList<IRI>(Arrays.asList(cls.getIRI()));
-		}		
+		}	
+		if (!cls.getEquivalentClasses(manager.getOntologies()).isEmpty()) // check all equivalent classes for cinergiFacet
+		{ 		
+			for (OWLClassExpression oce : cls.getEquivalentClasses(manager.getOntologies()))
+			{
+				if (oce.getClassExpressionType().toString().equals("Class"))
+				{
+					OWLClass equivalentClass = oce.getClassesInSignature().iterator().next();
+					if (OWLFunctions.hasCinergiFacet(equivalentClass, extensions, df))
+					{
+						return new ArrayList<IRI>(Arrays.asList(equivalentClass.getIRI()));
+					}
+				}				
+			}
+		}	
 		if (OWLFunctions.hasParentAnnotation(cls, extensions ,df))
 		{		    
 			ArrayList<IRI> parentIRIs = new ArrayList<IRI>();
@@ -201,7 +215,7 @@ public class KeywordAnalyzer {
 			}	
 			return parentIRIs;
 		}			
-		if (!cls.getEquivalentClasses(manager.getOntologies()).isEmpty())
+	/*	if (!cls.getEquivalentClasses(manager.getOntologies()).isEmpty())
 		{ 			
 			for (OWLClassExpression oce : cls.getEquivalentClasses(manager.getOntologies())) // equivalences
 			{
@@ -216,7 +230,7 @@ public class KeywordAnalyzer {
 				}	 
 			}
 		}		
-		if (!cls.getSuperClasses(manager.getOntologies()).isEmpty())
+	*/	if (!cls.getSuperClasses(manager.getOntologies()).isEmpty())
 		{
 			for (OWLClassExpression oce : cls.getSuperClasses(manager.getOntologies())) // subClassOf
 			{
@@ -358,14 +372,21 @@ public class KeywordAnalyzer {
 		{
 			for (String label : conc.labels)
 			{
-				// get levelshtein distance between the label and input phrase
+				// get levelshtein distance between the label and input phrase			
 				int tempDist = Levenshtein.distance(label, t.getToken());
+				
 				if (tempDist < minDistance)
 				{
+					minDistance = tempDist;
 					toUse = conc; // update the concept
 					closestLabel = label; // update the label
 				}
 			}
+		}
+		
+		if (t.getToken().equals("Radar"))
+		{
+			System.err.println("using: " + toUse.uri);
 		}
 		
 		if (!t.getToken().equals(t.getToken().toUpperCase()) 
@@ -375,10 +396,7 @@ public class KeywordAnalyzer {
 			return false;
 		}
 		OWLClass cls = df.getOWLClass(IRI.create(toUse.uri));
-		
-		// debug
-		System.err.println(t.getToken() + "  " + cls.getIRI());
-		
+				
 		// check for repeated terms
 		if (visited.contains(cls.getIRI().toString()))
 		{

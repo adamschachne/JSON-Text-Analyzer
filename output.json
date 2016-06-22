@@ -1,53 +1,40 @@
 [
   {
-    "abstract": "This data set was acquired with a Sippican T-5 XBT Expendable Probe during Marcus G. Langseth expedition MGL0807 conducted in 2008 (Chief Scientist: Dr. W. Steven Holbrook). These data files are of Sippican MK21 Export Data File format and include Sound Velocity and Temperature data that have not been processed. Data were acquired as part of the project(s): Collaborative Research: Seismic measurements of magma flux, arc composition, and lower-plate serpentinization in the Central American subduction factory and TICO-CAVA, 2008 Leg 2, and funding was provided by NSF grant(s): OCE04-05556, OCE04-05572, OCE04-05608, OCE04-05654, OCE05-20378, and OCE06-25178.",
-    "id": "https://www.sas.upenn.edu/lczodata/sites/www.sas.upenn.edu.lczodata/files/Quebreda Q3 5 min 1-8-10 to 12-12-11.hdr",
-    "title": "Raw XBT Expendable Probe Data from the Central America Subduction Zone acquired during the Marcus G. Langseth expedition MGL0807 (2008)",
+    "abstract": "The flux tower is located in the Jemez River basin of the Jemez Mountains in north-central New Mexico at the southern margin of the Rocky Mountain ecoregion in the Valles Caldera National Preserve. The climate can be characterized as semi-arid, montane. Vegetation at this site is composed of a Pinus ponderosa overstory with Gambel oak scrubland (Quercus gambelii) understory. Tower height is 25 m. Friction velocity, Temperature, Wind direction, Wind speed, Carbon dioxide flux, Sensible heat flux, Latent heat flux, Precipitation, Relative humidity, Barometric pressure, Carbon dioxide, Vapor pressure deficit, Volumetric water content, Radiation net, Radiation incoming PAR, Radiation incoming shortwave, Radiation outgoing shortwave, Radiation incoming longwave, Radiation outgoing longwave, Water vapor concentration, Ecosystem respiration, Gross primary productivity. Radio Detection and Ranging. Expedition",
+    "id": "http://www.czo.arizona.edu/data/pub/valle/Towers/Vcp/Tower_Vcp_metadata_2009.hdr (CZO_Datasets)",
+    "title": "Valles Caldera Ponderosa Pine Flux Tower.",
     "keywords": [
       {
-        "term": "Expendable Bathythermographs",
+        "term": "Caldera",
         "span": [
           "0",
-          "29"
+          "40"
         ],
         "ontID": [
-          "http://sweet.jpl.nasa.gov/2.3/matrEquipment.owl#Equipment"
+          "http://purl.obolibrary.org/obo/ENVO_00000191"
         ],
         "facets": [
-          "Equipment, Thing"
+          "Physiographic Feature, Feature"
         ]
       },
       {
-        "term": "Subduction",
+        "term": "Flux Tower",
         "span": [
-          "35",
-          "70"
+          "43",
+          "57"
         ],
         "ontID": [
-          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d659\u0026/geologic-processes"
+          "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
         ],
         "facets": [
-          "Geologic Processes, Process"
+          "Instrument, Equipment"
         ]
       },
       {
-        "term": "Expedition",
+        "term": "River",
         "span": [
-          "87",
-          "120"
-        ],
-        "ontID": [
-          "http://purl.bioontology.org/ontology/MESH/D006802"
-        ],
-        "facets": [
-          "Activity, Thing"
-        ]
-      },
-      {
-        "term": "Sound",
-        "span": [
-          "385",
-          "420"
+          "72",
+          "93"
         ],
         "ontID": [
           "http://sweet.jpl.nasa.gov/2.3/realmHydro.owl#HydrosphereFeature"
@@ -57,10 +44,77 @@
         ]
       },
       {
+        "term": "Mountain",
+        "span": [
+          "97",
+          "116"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00000191"
+        ],
+        "facets": [
+          "Physiographic Feature, Feature"
+        ]
+      },
+      {
+        "term": "Ecoregion",
+        "span": [
+          "171",
+          "199"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_01000276"
+        ],
+        "facets": [
+          "Ecoregion, Realm"
+        ]
+      },
+      {
+        "term": "Climate",
+        "span": [
+          "242",
+          "253"
+        ],
+        "ontID": [
+          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d276\u0026/climatology",
+          "http://purl.obolibrary.org/obo/ENVO_01000267"
+        ],
+        "facets": [
+          "Climatology, Science Domain",
+          "Atmosphere, Realm"
+        ]
+      },
+      {
+        "term": "Scrubland",
+        "span": [
+          "371",
+          "421"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00002297"
+        ],
+        "facets": [
+          "Environmental Feature, Feature"
+        ]
+      },
+      {
+        "term": "Height",
+        "span": [
+          "424",
+          "436"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
         "term": "Velocity",
         "span": [
-          "385",
-          "420"
+          "447",
+          "464"
         ],
         "ontID": [
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
@@ -72,8 +126,8 @@
       {
         "term": "Temperature",
         "span": [
-          "385",
-          "420"
+          "466",
+          "477"
         ],
         "ontID": [
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
@@ -83,42 +137,187 @@
         ]
       },
       {
-        "term": "Magmatic",
+        "term": "Wind Direction",
         "span": [
-          "546",
-          "556"
+          "479",
+          "493"
         ],
         "ontID": [
-          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d659\u0026/geologic-processes"
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Geologic Processes, Process"
+          "Measure, Property"
         ]
       },
       {
-        "term": "Arc",
+        "term": "Wind Speed",
         "span": [
-          "558",
-          "573"
+          "495",
+          "505"
         ],
         "ontID": [
-          "http://sweet.jpl.nasa.gov/2.3/realmGeol.owl#GeologicFeature"
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
         ],
         "facets": [
-          "Geologic Feature, Feature"
+          "Measure, Property"
         ]
       },
       {
-        "term": "NSF",
+        "term": "Carbon",
         "span": [
-          "706",
-          "716"
+          "507",
+          "526"
         ],
         "ontID": [
-          "http://purl.obolibrary.org/obo/OBI_0000245"
+          "http://purl.obolibrary.org/obo/CHEBI_24431"
         ],
         "facets": [
-          "Organization, Thing"
+          "Chemical, Material"
+        ]
+      },
+      {
+        "term": "Heat",
+        "span": [
+          "528",
+          "546"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/cinergi#namedProperty"
+        ],
+        "facets": [
+          "Property, Thing"
+        ]
+      },
+      {
+        "term": "Precipitation",
+        "span": [
+          "566",
+          "579"
+        ],
+        "ontID": [
+          "http://www.semanticweb.org/administrator/ontologies/2015/5/untitled-ontology-4#Atmospheric_Process"
+        ],
+        "facets": [
+          "Atmospheric Process, Process"
+        ]
+      },
+      {
+        "term": "Relative Humidity",
+        "span": [
+          "581",
+          "598"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Barometric Pressure",
+        "span": [
+          "600",
+          "619"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Vapor",
+        "span": [
+          "637",
+          "659"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00010483"
+        ],
+        "facets": [
+          "Environmental Material, Material"
+        ]
+      },
+      {
+        "term": "Pressure",
+        "span": [
+          "637",
+          "659"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Measurement",
+        "span": [
+          "661",
+          "685"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure",
+          "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
+        ],
+        "facets": [
+          "Measure, Property",
+          "Observation, Activity"
+        ]
+      },
+      {
+        "term": "Water",
+        "span": [
+          "661",
+          "685"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/CHEBI_24431"
+        ],
+        "facets": [
+          "Chemical, Material"
+        ]
+      },
+      {
+        "term": "Radiation",
+        "span": [
+          "687",
+          "700"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Radio Detection And Ranging",
+        "span": [
+          "923",
+          "950"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
+        ],
+        "facets": [
+          "Instrument, Equipment"
+        ]
+      },
+      {
+        "term": "Expedition",
+        "span": [
+          "953",
+          "963"
+        ],
+        "ontID": [
+          "http://purl.bioontology.org/ontology/MESH/D006802"
+        ],
+        "facets": [
+          "Activity, Thing"
         ]
       }
     ]
