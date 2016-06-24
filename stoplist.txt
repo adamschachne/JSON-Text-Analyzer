@@ -92,6 +92,7 @@ range
 rapid
 reach
 region
+resource
 rice
 rincon
 rise and light

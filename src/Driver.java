@@ -64,6 +64,8 @@ public class Driver {
 					stoplist, exceptionMap, nullIRIs);
 		
 
+		//OWLFunctions.getFacets(manager, df)
+		
 	//	long time = System.currentTimeMillis();
 	//	System.err.println("processing documents...");
 	

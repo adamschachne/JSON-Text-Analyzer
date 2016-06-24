@@ -365,6 +365,8 @@ public class KeywordAnalyzer {
 			return false;
 		
 		Concept toUse = vocab.concepts.get(0);	// default assignment
+		List<Concept> consideringToUse = new ArrayList<Concept>();
+		
 		String closestLabel = toUse.labels.get(0); // default assignment
 		
 		int minDistance = 100;
@@ -375,6 +377,16 @@ public class KeywordAnalyzer {
 				// get levelshtein distance between the label and input phrase			
 				int tempDist = Levenshtein.distance(label, t.getToken());
 				
+				if (tempDist < 2) // within 2 changes away, add it to a consideration list 
+				{
+					if (conc.uri.contains("obo/ENVO") || conc.uri.contains("cinergi_ontology/cinergi.owl")) 
+					{
+						consideringToUse.add(0, conc); // if its ENVO or cinergi at to beginning
+					}
+					else
+						consideringToUse.add(conc);
+				}
+				
 				if (tempDist < minDistance)
 				{
 					minDistance = tempDist;
@@ -383,6 +395,9 @@ public class KeywordAnalyzer {
 				}
 			}
 		}
+		
+		if (consideringToUse.size() > 0)
+			toUse = consideringToUse.get(0); // the first element of this list is the best concept
 		
 		if (!t.getToken().equals(t.getToken().toUpperCase()) 
 				&& closestLabel.equals(closestLabel.toUpperCase()))

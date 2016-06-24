@@ -1,27 +1,14 @@
 [
   {
-    "abstract": "The flux tower is located in the Jemez River basin of the Jemez Mountains in north-central New Mexico at the southern margin of the Rocky Mountain ecoregion in the Valles Caldera National Preserve. The climate can be characterized as semi-arid, montane. Vegetation at this site is composed of a Pinus ponderosa overstory with Gambel oak scrubland (Quercus gambelii) understory. Tower height is 25 m. Friction velocity, Temperature, Wind direction, Wind speed, Carbon dioxide flux, Sensible heat flux, Latent heat flux, Precipitation, Relative humidity, Barometric pressure, Carbon dioxide, Vapor pressure deficit, Volumetric water content, Radiation net, Radiation incoming PAR, Radiation incoming shortwave, Radiation outgoing shortwave, Radiation incoming longwave, Radiation outgoing longwave, Water vapor concentration, Ecosystem respiration, Gross primary productivity. Radio Detection and Ranging. Expedition",
-    "id": "http://www.czo.arizona.edu/data/pub/valle/Towers/Vcp/Tower_Vcp_metadata_2009.hdr (CZO_Datasets)",
-    "title": "Valles Caldera Ponderosa Pine Flux Tower.",
+    "abstract": "Anemometer. Buoy, GPS. Magnetogram. Piezometer, Sensor. Water, Voltage, Forest, Sensible Heat, Latent Heat, Ecoregion, Groundwater, groundwater depth, weir, topographic ",
+    "id": "",
+    "title": "testing devices",
     "keywords": [
       {
-        "term": "Caldera",
+        "term": "Device",
         "span": [
           "0",
-          "40"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000191"
-        ],
-        "facets": [
-          "Physiographic Feature, Feature"
-        ]
-      },
-      {
-        "term": "Flux Tower",
-        "span": [
-          "43",
-          "57"
+          "26"
         ],
         "ontID": [
           "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
@@ -31,207 +18,62 @@
         ]
       },
       {
-        "term": "River",
+        "term": "GPS",
         "span": [
-          "72",
-          "93"
+          "35",
+          "39"
         ],
         "ontID": [
-          "http://sweet.jpl.nasa.gov/2.3/realmHydro.owl#HydrosphereFeature"
+          "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
         ],
         "facets": [
-          "Hydrologic Feature, Feature"
+          "Instrument, Equipment"
         ]
       },
       {
-        "term": "Mountain",
+        "term": "Magnetogram",
         "span": [
-          "97",
-          "116"
+          "41",
+          "52"
         ],
         "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00000191"
+          "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
         ],
         "facets": [
-          "Physiographic Feature, Feature"
+          "Instrument, Equipment"
         ]
       },
       {
-        "term": "Ecoregion",
+        "term": "Piezometer",
         "span": [
-          "171",
-          "199"
+          "55",
+          "65"
         ],
         "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_01000276"
+          "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
         ],
         "facets": [
-          "Ecoregion, Realm"
+          "Instrument, Equipment"
         ]
       },
       {
-        "term": "Climate",
+        "term": "Sensor",
         "span": [
-          "242",
-          "253"
+          "67",
+          "73"
         ],
         "ontID": [
-          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d276\u0026/climatology",
-          "http://purl.obolibrary.org/obo/ENVO_01000267"
+          "http://purl.oclc.org/NET/ssnx/ssn#Sensor"
         ],
         "facets": [
-          "Climatology, Science Domain",
-          "Atmosphere, Realm"
+          "Sensor, Equipment"
         ]
       },
       {
-        "term": "Scrubland",
+        "term": "Water",
         "span": [
-          "371",
-          "421"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/ENVO_00002297"
-        ],
-        "facets": [
-          "Environmental Feature, Feature"
-        ]
-      },
-      {
-        "term": "Height",
-        "span": [
-          "424",
-          "436"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure, Property"
-        ]
-      },
-      {
-        "term": "Velocity",
-        "span": [
-          "447",
-          "464"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure, Property"
-        ]
-      },
-      {
-        "term": "Temperature",
-        "span": [
-          "466",
-          "477"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure, Property"
-        ]
-      },
-      {
-        "term": "Wind Direction",
-        "span": [
-          "479",
-          "493"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure, Property"
-        ]
-      },
-      {
-        "term": "Wind Speed",
-        "span": [
-          "495",
-          "505"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure, Property"
-        ]
-      },
-      {
-        "term": "Carbon",
-        "span": [
-          "507",
-          "526"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/CHEBI_24431"
-        ],
-        "facets": [
-          "Chemical, Material"
-        ]
-      },
-      {
-        "term": "Heat",
-        "span": [
-          "528",
-          "546"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/cinergi#namedProperty"
-        ],
-        "facets": [
-          "Property, Thing"
-        ]
-      },
-      {
-        "term": "Precipitation",
-        "span": [
-          "566",
-          "579"
-        ],
-        "ontID": [
-          "http://www.semanticweb.org/administrator/ontologies/2015/5/untitled-ontology-4#Atmospheric_Process"
-        ],
-        "facets": [
-          "Atmospheric Process, Process"
-        ]
-      },
-      {
-        "term": "Relative Humidity",
-        "span": [
-          "581",
-          "598"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure, Property"
-        ]
-      },
-      {
-        "term": "Barometric Pressure",
-        "span": [
-          "600",
-          "619"
-        ],
-        "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
-        ],
-        "facets": [
-          "Measure, Property"
-        ]
-      },
-      {
-        "term": "Vapor",
-        "span": [
-          "637",
-          "659"
+          "76",
+          "81"
         ],
         "ontID": [
           "http://purl.obolibrary.org/obo/ENVO_00010483"
@@ -241,10 +83,10 @@
         ]
       },
       {
-        "term": "Pressure",
+        "term": "Voltage",
         "span": [
-          "637",
-          "659"
+          "83",
+          "90"
         ],
         "ontID": [
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
@@ -254,38 +96,23 @@
         ]
       },
       {
-        "term": "Measurement",
+        "term": "Forest",
         "span": [
-          "661",
-          "685"
+          "92",
+          "98"
         ],
         "ontID": [
-          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure",
-          "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation"
+          "http://purl.obolibrary.org/obo/ENVO_00002297"
         ],
         "facets": [
-          "Measure, Property",
-          "Observation, Activity"
+          "Environmental Feature, Feature"
         ]
       },
       {
-        "term": "Water",
+        "term": "Sensible Heat",
         "span": [
-          "661",
-          "685"
-        ],
-        "ontID": [
-          "http://purl.obolibrary.org/obo/CHEBI_24431"
-        ],
-        "facets": [
-          "Chemical, Material"
-        ]
-      },
-      {
-        "term": "Radiation",
-        "span": [
-          "687",
-          "700"
+          "100",
+          "113"
         ],
         "ontID": [
           "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
@@ -295,10 +122,130 @@
         ]
       },
       {
-        "term": "Radio Detection And Ranging",
+        "term": "Latent Heat",
         "span": [
-          "923",
-          "950"
+          "115",
+          "126"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Ecoregion",
+        "span": [
+          "128",
+          "137"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_01000276"
+        ],
+        "facets": [
+          "Ecoregion, Realm"
+        ]
+      },
+      {
+        "term": "Weir",
+        "span": [
+          "171",
+          "175"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/realmHydro.owl#HydrosphereFeature"
+        ],
+        "facets": [
+          "Hydrologic Feature, Feature"
+        ]
+      }
+    ]
+  },
+  {
+    "abstract": "This data set was acquired with the LDEO Portable HiRes Multi-Channel Seismic system during Endeavor expedition R/V EN370 conducted in 2002 (Chief Scientist: Dr. Gregory Mountain; Investigators: Dr. Gregory Mountain, Dr. Cecilia McHugh, and Dr. Nicholas Christie-Blick). These data files are of ASCII format and include Seismic Shot Point Navigation data that provide the primary seismic navigation source for this cruise. Data were acquired as part of the project: Hi-Res MCS, CHIRP and side-scan sonar study of NY/NJ margins, and funding was provided by NSF grants: OCE01-19019 and OCE02-24767. These data are cited by McHugh et al., 2010.",
+    "id": "Doc ID:org.marine-geo:metadata:10000 (IEDA)",
+    "title": "Seismic Shot Point Navigation Data from the Long Island Shelf acquired during the R/V Endeavor expedition EN370 (2002)",
+    "keywords": [
+      {
+        "term": "Island",
+        "span": [
+          "40",
+          "61"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/realmHydro.owl#HydrosphereFeature"
+        ],
+        "facets": [
+          "Hydrologic Feature, Feature"
+        ]
+      },
+      {
+        "term": "Shelf",
+        "span": [
+          "40",
+          "61"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/realmGeol.owl#GeologicFeature",
+          "http://hydro10.sdsc.edu/cinergi_ontology/cinergi.owl#Marine_Feature"
+        ],
+        "facets": [
+          "Geologic Feature, Feature",
+          "Marine Feature, Feature"
+        ]
+      },
+      {
+        "term": "Expedition",
+        "span": [
+          "78",
+          "105"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/cinergi.owl#Expedition"
+        ],
+        "facets": [
+          "Expedition, Activity"
+        ]
+      },
+      {
+        "term": "Mountain",
+        "span": [
+          "277",
+          "297"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00000191"
+        ],
+        "facets": [
+          "Physiographic Feature, Feature"
+        ]
+      },
+      {
+        "term": "NSF",
+        "span": [
+          "677",
+          "687"
+        ],
+        "ontID": [
+          "http://gcmdservices.gsfc.nasa.gov/kms/concept/2b890e5b-1b50-4454-90a9-538dd891da9a"
+        ],
+        "facets": [
+          "GOVERNMENT AGENCIES-U.S. FEDERAL AGENCIES, Organization"
+        ]
+      }
+    ]
+  },
+  {
+    "abstract": "This data set was acquired with a Sippican MK21 XBT Expendable Probe during Nathaniel B. Palmer expedition NBP0802 conducted in 2008 (Chief Scientist: Dr. David Caron). These data files are of Sippican MK21 Export Data File format and include Temperature data that have not been processed. Data were acquired as part of the project(s): Collaborative Research: Do crustacean zooplankton play a pivotal role in structuring heterotrophic plankton communities. and Ross-Sea outer continental shelf morphology and near-surface stratigraphy: Quaternary ice-sheet grounding-zone migrations and stratigraphy: Quaternary ice-sheet grounding-zone migrations and the LGM dilemma., and funding was provided by NSF grant(s): ANT05-42456.",
+    "id": "Doc ID:org.marine-geo:metadata:10013 (IEDA)",
+    "title": "Raw XBT Expendable Probe Data from the Ross Sea acquired during the Nathaniel B. Palmer expedition NBP0802 (2008)",
+    "keywords": [
+      {
+        "term": "XBT",
+        "span": [
+          "0",
+          "29"
         ],
         "ontID": [
           "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
@@ -308,16 +255,374 @@
         ]
       },
       {
-        "term": "Expedition",
+        "term": "Sea",
         "span": [
-          "953",
-          "963"
+          "35",
+          "47"
         ],
         "ontID": [
-          "http://purl.bioontology.org/ontology/MESH/D006802"
+          "http://hydro10.sdsc.edu/cinergi_ontology/cinergi.owl#Marine_Feature"
         ],
         "facets": [
-          "Activity, Thing"
+          "Marine Feature, Feature"
+        ]
+      },
+      {
+        "term": "Expedition",
+        "span": [
+          "64",
+          "98"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/cinergi.owl#Expedition"
+        ],
+        "facets": [
+          "Expedition, Activity"
+        ]
+      },
+      {
+        "term": "Temperature",
+        "span": [
+          "358",
+          "374"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Zooplankton",
+        "span": [
+          "490",
+          "506"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/cinergi.owl#Biological_Material"
+        ],
+        "facets": [
+          "Biological Material, Material"
+        ]
+      },
+      {
+        "term": "Continental",
+        "span": [
+          "578",
+          "621"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/realmGeol.owl#Continental"
+        ],
+        "facets": [
+          "Continental, Realm"
+        ]
+      },
+      {
+        "term": "Shelf",
+        "span": [
+          "578",
+          "621"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/realmGeol.owl#GeologicFeature",
+          "http://hydro10.sdsc.edu/cinergi_ontology/cinergi.owl#Marine_Feature"
+        ],
+        "facets": [
+          "Geologic Feature, Feature",
+          "Marine Feature, Feature"
+        ]
+      },
+      {
+        "term": "Stratigraphy",
+        "span": [
+          "626",
+          "651"
+        ],
+        "ontID": [
+          "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
+        ],
+        "facets": [
+          "Earth Science, Science Domain"
+        ]
+      },
+      {
+        "term": "Quaternary",
+        "span": [
+          "653",
+          "716"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/geochronologyImpure.owl#Period"
+        ],
+        "facets": [
+          "Period, Geologic Time"
+        ]
+      },
+      {
+        "term": "Ice Sheet",
+        "span": [
+          "",
+          ""
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00000131"
+        ],
+        "facets": [
+          "Glacial Feature, Feature"
+        ]
+      },
+      {
+        "term": "NSF",
+        "span": [
+          "815",
+          "825"
+        ],
+        "ontID": [
+          "http://gcmdservices.gsfc.nasa.gov/kms/concept/2b890e5b-1b50-4454-90a9-538dd891da9a"
+        ],
+        "facets": [
+          "GOVERNMENT AGENCIES-U.S. FEDERAL AGENCIES, Organization"
+        ]
+      }
+    ]
+  },
+  {
+    "abstract": "Standard meteorological data are being collected at the PLZ-ZOB site using a suite of Campbell Scientific Instruments. The data is downloaded semi-regularly on-site. The variable being continuously monitored are air pressure, air temperature, relative humidity, wind speed and direction, and precipiration and recorded to the datalogger every 30 minutes. CITATION:",
+    "id": "Doc ID:http://www.czo.arizona.edu/data/pub/valle/MetStation/met1_30min/data_30min_met1_metadata.hdr (CZO_Datasets)",
+    "title": "Meteorological Data from the Jemez CZO MidElevation PLZ-ZOB Site.",
+    "keywords": [
+      {
+        "term": "Meteorology",
+        "span": [
+          "0",
+          "19"
+        ],
+        "ontID": [
+          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d106\u0026/atmospheric-sciences"
+        ],
+        "facets": [
+          "Atmospheric Sciences, Science Domain"
+        ]
+      },
+      {
+        "term": "Instruments",
+        "span": [
+          "153",
+          "184"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
+        ],
+        "facets": [
+          "Instrument, Equipment"
+        ]
+      },
+      {
+        "term": "Air Pressure",
+        "span": [
+          "281",
+          "293"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Air Temperatures",
+        "span": [
+          "295",
+          "310"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Relative Humidity",
+        "span": [
+          "312",
+          "329"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Wind",
+        "span": [
+          "331",
+          "335"
+        ],
+        "ontID": [
+          "http://www.vocabularyserver.com/usgs/index.php?tema\u003d100\u0026/atmospheric-and-climatic-processes"
+        ],
+        "facets": [
+          "Atmospheric And Climatic Processes, Natural Processes, Process"
+        ]
+      },
+      {
+        "term": "Speed",
+        "span": [
+          "336",
+          "355"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Direction",
+        "span": [
+          "336",
+          "355"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Datalogger",
+        "span": [
+          "391",
+          "405"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
+        ],
+        "facets": [
+          "Instrument, Equipment"
+        ]
+      }
+    ]
+  },
+  {
+    "abstract": "Quality assured soil moisture from three sets of nested (depths 0.1, 0.3 and 0.5 m) soil moisture probes(sensor: Decagon Echo2) at RTH3 network. Sensor were grouped 1-3 (lat:40.6645848 long:-77.9054530; ground elevation:266.06 m),4-6 (lat:40.6645169 long:-77.9055588; ground elevation: 265.16 m), 7-9 (lat:40.6645108 long:-77.9053428;ground elevation: 265.84 m), with sensors 1,4 and 7 located at a depth 0.1 m and sensors 3,6 and 9 at a depth of 0.5 m. CITATION:",
+    "id": "Doc ID:http://www.czo.arizona.edu/data/pub/valle/MetStation/met1_30min/data_30min_met1_metadata.hdr (CZO_Datasets)",
+    "title": "Shale Hills RTH3 (Real-Time Hydrology Network) Soil Moisture - 2009",
+    "keywords": [
+      {
+        "term": "Shale",
+        "span": [
+          "0",
+          "60"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/CGI_Lithology#rock_material"
+        ],
+        "facets": [
+          "Rock Material, Material"
+        ]
+      },
+      {
+        "term": "Hill",
+        "span": [
+          "0",
+          "60"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00000191"
+        ],
+        "facets": [
+          "Physiographic Feature, Feature"
+        ]
+      },
+      {
+        "term": "Hydrology",
+        "span": [
+          "0",
+          "60"
+        ],
+        "ontID": [
+          "https://en.wikipedia.org/wiki/Branches_of_science#Earth_science"
+        ],
+        "facets": [
+          "Earth Science, Science Domain"
+        ]
+      },
+      {
+        "term": "Soil",
+        "span": [
+          "0",
+          "60"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00010483"
+        ],
+        "facets": [
+          "Environmental Material, Material"
+        ]
+      },
+      {
+        "term": "Moisture",
+        "span": [
+          "0",
+          "60"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Soil Moisture",
+        "span": [
+          "84",
+          "97"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure"
+        ],
+        "facets": [
+          "Measure, Property"
+        ]
+      },
+      {
+        "term": "Sensor",
+        "span": [
+          "214",
+          "220"
+        ],
+        "ontID": [
+          "http://purl.oclc.org/NET/ssnx/ssn#Sensor"
+        ],
+        "facets": [
+          "Sensor, Equipment"
+        ]
+      },
+      {
+        "term": "Elevation",
+        "span": [
+          "274",
+          "290"
+        ],
+        "ontID": [
+          "http://hydro10.sdsc.edu/cinergi_ontology/basic#Measure",
+          "http://hydro10.sdsc.edu/cinergi_ontology/observation#Observation",
+          "http://purl.obolibrary.org/obo/ENVO_00000191"
+        ],
+        "facets": [
+          "Measure, Property",
+          "Observation, Activity",
+          "Physiographic Feature, Feature"
         ]
       }
     ]
