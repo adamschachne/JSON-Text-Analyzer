@@ -18,6 +18,19 @@
         ]
       },
       {
+        "term": "Buoy",
+        "span": [
+          "29",
+          "33"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/matrInstrument.owl#Instrument"
+        ],
+        "facets": [
+          "Instrument, Equipment"
+        ]
+      },
+      {
         "term": "GPS",
         "span": [
           "35",
@@ -145,6 +158,32 @@
         ],
         "facets": [
           "Ecoregion, Realm"
+        ]
+      },
+      {
+        "term": "Groundwater",
+        "span": [
+          "139",
+          "150"
+        ],
+        "ontID": [
+          "http://purl.obolibrary.org/obo/ENVO_00010483"
+        ],
+        "facets": [
+          "Environmental Material, Material"
+        ]
+      },
+      {
+        "term": "Groundwater Depth",
+        "span": [
+          "152",
+          "169"
+        ],
+        "ontID": [
+          "http://sweet.jpl.nasa.gov/2.3/realmHydro.owl#HydrosphereFeature"
+        ],
+        "facets": [
+          "Hydrologic Feature, Feature"
         ]
       },
       {

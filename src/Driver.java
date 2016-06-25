@@ -50,7 +50,7 @@ public class Driver {
 			System.err.println("failed to gather extensions");
 			System.exit(1);
 		}
-		
+	
 		// load documents
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(argv[0]));
@@ -64,13 +64,14 @@ public class Driver {
 					stoplist, exceptionMap, nullIRIs);
 		
 
-		//OWLFunctions.getFacets(manager, df)
-		
+	/*	for (String str : OWLFunctions.getFacets(manager, df)) {
+			System.out.println(str);
+		} */
 	//	long time = System.currentTimeMillis();
 	//	System.err.println("processing documents...");
 	
 		analyzer.processDocuments(docs);
-	
+		
 	//	System.out.println("total time: " + (System.currentTimeMillis()-time));
 		
 		FileWriter fw = new FileWriter(argv[1]);

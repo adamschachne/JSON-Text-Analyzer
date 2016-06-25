@@ -137,7 +137,8 @@ public class KeywordAnalyzer {
 	
 	public Vocab vocabTerm(String input) throws UnsupportedEncodingException
 	{
-		String prefix = "http://tikki.neuinfo.org:9000/scigraph/vocabulary/term/";
+		//String prefix = "http://tikki.neuinfo.org:9000/scigraph/vocabulary/term/";
+		String prefix = "http://ec-scigraph.sdsc.edu:9000/scigraph/vocabulary/term/";
 		String suffix = "?limit=10&searchSynonyms=true&searchAbbreviations=false&searchAcronyms=false";
 		String urlInput = URLEncoder.encode(input, StandardCharsets.UTF_8.name()).replace("+", "%20");
 	
@@ -156,8 +157,11 @@ public class KeywordAnalyzer {
 		} catch (Exception e) {
 			return null;
 		}
-		Vocab vocab = gson.fromJson(urlOut, Vocab.class);
-		
+		// fixed for ec-scigraph
+		Concept[] concepts = gson.fromJson(urlOut, Concept[].class);
+		//Vocab vocab = gson.fromJson(urlOut, Vocab.class);
+		ArrayList<Concept> conceptList = new ArrayList<Concept>(Arrays.asList(concepts));
+		Vocab vocab = new Vocab(conceptList);
 		// preliminary check
 		if (stoplist.contains(vocab.concepts.get(0).labels.get(0).toLowerCase()))
 			return null; 
@@ -283,7 +287,8 @@ public class KeywordAnalyzer {
 	private ArrayList<Keyword> process(String testInput, HashSet<String> visited) throws Exception
 	{
 		String url = URLEncoder.encode(testInput, StandardCharsets.UTF_8.name());
-		String chunks = "http://tikki.neuinfo.org:9000/scigraph/lexical/chunks?text=";
+		//String chunks = "http://tikki.neuinfo.org:9000/scigraph/lexical/chunks?text=";
+		String chunks = "http://ec-scigraph.sdsc.edu:9000/scigraph/lexical/chunks?text=";		
 		//System.out.println(chunks+url);
 		//long time = System.currentTimeMillis();
 		String json = readURL(chunks + url);
@@ -474,7 +479,8 @@ public class KeywordAnalyzer {
 
 	public POS[] pos(Gson gson, String input) throws Exception
 	{
-		String prefix = "http://tikki.neuinfo.org:9000/scigraph/lexical/pos?text=";
+		//String prefix = "http://tikki.neuinfo.org:9000/scigraph/lexical/pos?text=";
+		String prefix = "http://ec-scigraph.sdsc.edu:9000/scigraph/lexical/pos?text=";
 		String urlInput = URLEncoder.encode(input, StandardCharsets.UTF_8.name());
 		String urlOut = readURL(prefix+urlInput);
 		
