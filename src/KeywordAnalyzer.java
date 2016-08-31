@@ -66,7 +66,7 @@ public class KeywordAnalyzer {
 	
 	public void processDocument(Document doc) throws UnsupportedEncodingException {
 
-		String text = doc.getTitle() + " " + doc.getText();		
+		String text = doc.getTitle() + ", " + doc.getText();		
 		
 		//System.out.println("processing: " + doc.getTitle());
 		long before = System.currentTimeMillis();
@@ -171,6 +171,7 @@ public class KeywordAnalyzer {
 	// returns the cinegiFacet associated with any class, returns null if there is not one
 	public List<IRI> getFacetIRI(OWLClass cls, HashSet<IRI> visited)
 	{		
+	//	System.err.println(OWLFunctions.getLabel(cls, manager, df));
 		if (visited.contains(cls.getIRI()))
 		{
 			// prevent infinite loops
@@ -301,6 +302,7 @@ public class KeywordAnalyzer {
 	    for (Tokens tok : tokens) // each chunk t
 	    {
 	    	//long time = System.currentTimeMillis();
+	    	System.out.println(tok.getToken());
 	    	if (processChunk(tok, keywords, visited) == true)
 	    		continue;
 	    	
@@ -375,13 +377,14 @@ public class KeywordAnalyzer {
 		String closestLabel = toUse.labels.get(0); // default assignment
 		
 		int minDistance = 100;
+		//System.out.println(t.getToken().toString() + "    <-   started here");
 		for (Concept conc : vocab.concepts)
 		{
 			for (String label : conc.labels)
 			{
 				// get levelshtein distance between the label and input phrase			
 				int tempDist = Levenshtein.distance(label, t.getToken());
-				
+				//System.out.println(label + "   " + tempDist);
 				if (tempDist < 2) // within 2 changes away, add it to a consideration list 
 				{
 					if (conc.uri.contains("obo/ENVO") || conc.uri.contains("cinergi_ontology/cinergi.owl")) 
