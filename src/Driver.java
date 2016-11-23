@@ -50,7 +50,7 @@ public class Driver {
 			System.err.println("failed to gather extensions");
 			System.exit(1);
 		}
-	
+		//OWLOntology cinergi_ont= null; OWLOntology extensions = null; // test 
 		// load documents
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(argv[0]));
@@ -61,19 +61,10 @@ public class Driver {
 		LinkedHashMap<String, IRI> exceptionMap = null; // Create this using label duplicates spreadsheet
 		
 		KeywordAnalyzer analyzer = new KeywordAnalyzer(manager, df, cinergi_ont, extensions, gson,
-					stoplist, exceptionMap, nullIRIs);
-		
-
-	/*	for (String str : OWLFunctions.getFacets(manager, df)) {
-			System.out.println(str);
-		} */
-	//	long time = System.currentTimeMillis();
-	//	System.err.println("processing documents...");
+					stoplist, exceptionMap, nullIRIs);	
 	
 		analyzer.processDocuments(docs);
-		
-	//	System.out.println("total time: " + (System.currentTimeMillis()-time));
-		
+			
 		FileWriter fw = new FileWriter(argv[1]);
 		fw.write(gson.toJson(analyzer.getOutput())); 
 	

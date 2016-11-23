@@ -43,14 +43,15 @@ public class KeywordAnalyzer {
 	private LinkedHashMap<String, IRI> exceptionMap;
 	private int counter;
 	private HttpClient client;
+	private NLPHelper nlpHelper;
 	
 	public KeywordAnalyzer(OWLOntologyManager manager, OWLDataFactory df, OWLOntology ont, 
 			OWLOntology extensions, Gson gson, List<String> stoplist, 
-			LinkedHashMap<String,IRI> exceptionMap, List<String> nullIRIs) {
+			LinkedHashMap<String,IRI> exceptionMap, List<String> nullIRIs) throws IOException {
 		output = new ArrayList<Output>();
 		this.manager = manager;
 		this.df = df;
-		this.cinergi = cinergi;
+		//this.cinergi = cinergi;
 		this.extensions = extensions;
 		this.gson = gson;
 		this.stoplist = stoplist;
@@ -58,6 +59,7 @@ public class KeywordAnalyzer {
 		this.nullIRIs = nullIRIs;
 		client = new DefaultHttpClient();
 		counter = 0;
+		this.nlpHelper = new NLPHelper();
 	}
 
 	public List<Output> getOutput()	{
@@ -69,11 +71,12 @@ public class KeywordAnalyzer {
 		String text = doc.getTitle() + ", " + doc.getText();		
 		
 		//System.out.println("processing: " + doc.getTitle());
-		long before = System.currentTimeMillis();
+		//long before = System.currentTimeMillis();
 		ArrayList<Keyword> keywords = new ArrayList<Keyword>();
 		HashSet<String> visited = new HashSet<String>();
 		try {
-			keywords = process(text, visited);
+			//keywords = process(text, visited);
+			keywords = process2(text, visited);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}		
@@ -220,22 +223,8 @@ public class KeywordAnalyzer {
 			}	
 			return parentIRIs;
 		}			
-	/*	if (!cls.getEquivalentClasses(manager.getOntologies()).isEmpty())
-		{ 			
-			for (OWLClassExpression oce : cls.getEquivalentClasses(manager.getOntologies())) // equivalences
-			{
-				if (oce.getClassExpressionType().toString().equals("Class"))
-				{
-					List<IRI> retVal = getFacetIRI(oce.getClassesInSignature().iterator().next(), visited); 
-					
-					if (retVal == null)
-						continue;
-					
-					return retVal;	
-				}	 
-			}
-		}		
-	*/	if (!cls.getSuperClasses(manager.getOntologies()).isEmpty())
+
+		if (!cls.getSuperClasses(manager.getOntologies()).isEmpty())
 		{
 			for (OWLClassExpression oce : cls.getSuperClasses(manager.getOntologies())) // subClassOf
 			{
@@ -265,25 +254,20 @@ public class KeywordAnalyzer {
 	}
 	
 	// given a (2nd level) cinergiFacet, returns a string of path facet2, facet1
-	public String facetPath(OWLClass cls)
-	{
-		if (OWLFunctions.getParentAnnotationClass(cls, extensions, df).size() == 0)
-		{
-			//System.err.println(OWLFunctions.getLabel(cls, manager, df) + " has no cinergiParent, terminating.");
-			return null;
-			//return null;
-		}
-		OWLClass cinergiParent = OWLFunctions.getParentAnnotationClass(cls, extensions, df).get(0);
-		if (OWLFunctions.isTopLevelFacet(cinergiParent, extensions, df) || 
-				cinergiParent.getIRI().equals(IRI.create("http://www.w3.org/2002/07/owl#Thing")))
-		{
-			return (OWLFunctions.getLabel(cls, manager, df) + ", " + OWLFunctions.getLabel(cinergiParent, manager, df));
-		}
-		else
-		{
-			return (OWLFunctions.getLabel(cls,  manager, df) + ", " + facetPath(cinergiParent));
-		} 
-	}
+    private String facetPath(OWLClass cls) {
+        if (OWLFunctions.getParentAnnotationClass(cls, extensions, df).size() == 0) {
+            System.err.println(OWLFunctions.getLabel(cls, manager, df) + " has no cinergiParent, terminating.");
+            return "";
+            //return null;
+        }
+        OWLClass cinergiParent = OWLFunctions.getParentAnnotationClass(cls, extensions, df).get(0);
+        if (OWLFunctions.isTopLevelFacet(cinergiParent, extensions, df) ||
+                cinergiParent.getIRI().equals(IRI.create("http://www.w3.org/2002/07/owl#Thing"))) {
+            return (OWLFunctions.getLabel(cls, manager, df) + " | " + OWLFunctions.getLabel(cinergiParent, manager, df));
+        } else {
+            return (OWLFunctions.getLabel(cls, manager, df) + " | " + facetPath(cinergiParent));
+        }
+    }
 
 	private ArrayList<Keyword> process(String testInput, HashSet<String> visited) throws Exception
 	{
@@ -302,7 +286,7 @@ public class KeywordAnalyzer {
 	    for (Tokens tok : tokens) // each chunk t
 	    {
 	    	//long time = System.currentTimeMillis();
-	    	System.out.println(tok.getToken());
+	    	//System.out.println(tok.getToken());
 	    	if (processChunk(tok, keywords, visited) == true)
 	    		continue;
 	    	
@@ -348,8 +332,128 @@ public class KeywordAnalyzer {
 	    }
 		return keywords;	    			 
 	}
+	
+	
+	private ArrayList<Keyword> process2(String testInput, HashSet<String> visited) throws Exception {
+        ArrayList<Keyword> keywords = new ArrayList<Keyword>();
+        List<NLPHelper.NP> npList = nlpHelper.processText(testInput);
+        for (NLPHelper.NP np : npList) {
+            Tokens tok = new Tokens(np.getText());
+            tok.setStart(String.valueOf(np.getStart()));
+            tok.setEnd(String.valueOf(np.getEnd()));
+            
+            int numKeywords = 0;            
+            if (processChunk(tok, keywords, visited) == true) {
+                continue;
+            }
+            POS[] parts = np.getPosArr();          
+            if (parts.length > 2) {
+                // try shorter phrases (IBO)
+                boolean found = false;
+                for (int i = parts.length - 1; i >= 2; i--) {
+                    StringBuilder sb = new StringBuilder();
+                    int count = 0;
+                    for (int j = 0; j < i; j++) {
+                        if (isEligibleTerm(parts[j])) {
+                            sb.append(parts[j].token).append(' ');
+                            count++;
+                        }
+                    }
+                    Tokens tempToken = new Tokens(tok);
+                    tempToken.setToken(sb.toString().trim());
+                    if (processChunk(tempToken, keywords, visited) == true) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) {
+                    continue;
+                }
+
+                for (int i = 1; i <= parts.length - 2; i++) {
+                    StringBuilder sb = new StringBuilder();
+                    int count = 0;
+                    for (int j = i; j < parts.length; j++) {
+                        if (isEligibleTerm(parts[j])) {
+                            sb.append(parts[j].token).append(' ');
+                            count++;
+                        }
+                    }
+                    Tokens tempToken = new Tokens(tok);
+                    tempToken.setToken(sb.toString().trim());
+                    if (processChunk(tempToken, keywords, visited) == true) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) {
+                    continue;
+                }
+            }
+            
+            for (POS p : parts) { 
+                if (isEligibleTerm(p)) {
+                    // if there is a hyphen
+                    if (p.token.contains("-")) {
+                        // if there is a hyphen in the array of POS, then
+                        // break it into separate parts and process them individually
+                        int i = p.token.indexOf("-");
+                        String[] substr = {p.token.substring(0, i), p.token.substring(i + 1)};
+                        Tokens tempToken = new Tokens(substr[0] + " " + substr[1]);
+                        if (processChunk(tempToken, keywords, visited) == true) // see if the phrase with a space replacing the hyphen exists
+                        {
+                        	numKeywords++;
+                            continue;
+                        }
+                    } else // doesnt contain a hyphen
+                    {
+                		
+                        Tokens tempToken = new Tokens(tok);
+                        tempToken.setToken(p.token);
+                        if (processChunk(tempToken, keywords, visited) == true) 
+                        {
+                        	numKeywords++;
+                            continue;
+                        }
+                    }
+                }            	
+            }
+            
+            // remove smaller keywords from the same phrase that derive from the same facet
+            if (numKeywords > 1) {
+	    		for (int i = keywords.size()-numKeywords; i < keywords.size(); i++) {
+	    			for (int j = i + 1; j < keywords.size(); j++) {
+	    				Keyword temp_i = keywords.get(i);
+	    				Keyword temp_j = keywords.get(j);
+	    				if (temp_i.getFacet()[0].equals(temp_j.getFacet()[0])) {
+	    					if (temp_i.getTerm().length() >= temp_j.getTerm().length()) {
+	    						System.out.println(temp_i.getTerm() + " has the same facet as " + temp_j.getTerm() + " removing " + temp_j.getTerm());
+	    						keywords.remove(j);	    						
+	    						j--;
+	    						numKeywords--;
+	    					}
+	    					else {
+	    						System.out.println("removed " + temp_i.getTerm());
+	    						keywords.remove(i);	    						
+	    						i--;
+	    						numKeywords--;
+	    						break;
+	    					}
+	    				}
+	    			}
+	    		}
+            }       	
+        } 
+        return keywords;
+    }
+	
+	public static boolean isEligibleTerm(POS p) {
+        return (p.pos.equals("NN") || p.pos.equals("NNP") ||
+                p.pos.equals("NNPS") || p.pos.equals("NNS") || p.pos.equals("JJ"));
+    }
+	
 	// takes a token from POS service and adds the corresponding keyword to a set
-	private boolean processChunk(Tokens t, ArrayList<Keyword> keywords, HashSet<String> visited) throws Exception {
+	private boolean processChunk(Tokens t, ArrayList<Keyword> keywords, HashSet<String> visited) throws Exception {		
 		
 		Vocab vocab = vocabTerm(t.getToken());
 		if (vocab == null)
@@ -407,12 +511,13 @@ public class KeywordAnalyzer {
 		if (consideringToUse.size() > 0)
 			toUse = consideringToUse.get(0); // the first element of this list is the best concept
 		
-		if (!t.getToken().equals(t.getToken().toUpperCase()) 
-				&& closestLabel.equals(closestLabel.toUpperCase()))
+		//if input is all caps (abbreviation), check if the output is the exact same 
+		if (t.getToken().equals(t.getToken().toUpperCase()))
+			if (closestLabel.equals(t.getToken()) == false)
 		{
-			// check if the input token is all caps and if the response term is also all caps
 			return false;
 		}
+			
 		OWLClass cls = df.getOWLClass(IRI.create(toUse.uri));
 				
 		// check for repeated terms
