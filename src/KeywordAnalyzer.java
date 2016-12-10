@@ -145,9 +145,10 @@ public class KeywordAnalyzer {
 		String suffix = "?limit=10&searchSynonyms=true&searchAbbreviations=false&searchAcronyms=false";
 		String urlInput = URLEncoder.encode(input, StandardCharsets.UTF_8.name()).replace("+", "%20");
 	
-		if (input == null)
+		if (input == null) {
 			return null;
-		
+		}
+
 		String urlOut = null;
 		if (stoplist.contains(input.toLowerCase()))
 		{
@@ -155,11 +156,20 @@ public class KeywordAnalyzer {
 		}
 		try {			
 			urlOut = readURL(prefix+urlInput+suffix);	
-			if (urlOut == null)
-				return null;
 		} catch (Exception e) {
+			urlOut = null;
+		}
+		
+		if (urlOut == null) {
+			if (input.contains("-")) {
+	            // if there is a hyphen then separate it there
+	            int i = input.indexOf("-");
+	            String[] substr = {input.substring(0, i), input.substring(i + 1)};
+	            return vocabTerm(substr[0] + " " + substr[1]);
+			}
 			return null;
 		}
+		
 		// fixed for ec-scigraph
 		Concept[] concepts = gson.fromJson(urlOut, Concept[].class);
 		//Vocab vocab = gson.fromJson(urlOut, Vocab.class);
@@ -346,12 +356,13 @@ public class KeywordAnalyzer {
             if (processChunk(tok, keywords, visited) == true) {
                 continue;
             }
-            POS[] parts = np.getPosArr();          
+            POS[] parts = np.getPosArr();  
+
             if (parts.length > 2) {
                 // try shorter phrases (IBO)
-                boolean found = false;
+                boolean found = false;    
                 for (int i = parts.length - 1; i >= 2; i--) {
-                    StringBuilder sb = new StringBuilder();
+                    StringBuilder sb = new StringBuilder();                   
                     int count = 0;
                     for (int j = 0; j < i; j++) {
                         if (isEligibleTerm(parts[j])) {
@@ -361,15 +372,19 @@ public class KeywordAnalyzer {
                     }
                     Tokens tempToken = new Tokens(tok);
                     tempToken.setToken(sb.toString().trim());
+                    //System.out.println("trying: " + tempToken.getToken());
                     if (processChunk(tempToken, keywords, visited) == true) {
-                        found = true;
+                        found = true; 
+                        numKeywords++;
+                    //    System.out.println("using: " + tempToken.getToken());
                         break;
                     }
                 }
+                /*
                 if (found) {
                     continue;
                 }
-
+              	*/
                 for (int i = 1; i <= parts.length - 2; i++) {
                     StringBuilder sb = new StringBuilder();
                     int count = 0;
@@ -381,45 +396,32 @@ public class KeywordAnalyzer {
                     }
                     Tokens tempToken = new Tokens(tok);
                     tempToken.setToken(sb.toString().trim());
+                    //System.out.println("trying: " + tempToken.getToken());
                     if (processChunk(tempToken, keywords, visited) == true) {
+                    //	System.out.println("using: " + tempToken.getToken());
+                    	numKeywords++;
                         found = true;
                         break;
                     }
                 }
                 if (found) {
                     continue;
-                }
+                }  
             }
             
             for (POS p : parts) { 
-                if (isEligibleTerm(p)) {
-                    // if there is a hyphen
-                    if (p.token.contains("-")) {
-                        // if there is a hyphen in the array of POS, then
-                        // break it into separate parts and process them individually
-                        int i = p.token.indexOf("-");
-                        String[] substr = {p.token.substring(0, i), p.token.substring(i + 1)};
-                        Tokens tempToken = new Tokens(substr[0] + " " + substr[1]);
-                        if (processChunk(tempToken, keywords, visited) == true) // see if the phrase with a space replacing the hyphen exists
-                        {
-                        	numKeywords++;
-                            continue;
-                        }
-                    } else // doesnt contain a hyphen
+            	if (isEligibleTerm(p)) {
+                    Tokens tempToken = new Tokens(tok);
+                    tempToken.setToken(p.token);
+                    if (processChunk(tempToken, keywords, visited) == true) 
                     {
-                		
-                        Tokens tempToken = new Tokens(tok);
-                        tempToken.setToken(p.token);
-                        if (processChunk(tempToken, keywords, visited) == true) 
-                        {
-                        	numKeywords++;
+                    	numKeywords++;
                             continue;
-                        }
                     }
                 }            	
             }
             
-            // remove smaller keywords from the same phrase that derive from the same facet
+            // remove smaller keywords from the same phrase and facet
             if (numKeywords > 1) {
 	    		for (int i = keywords.size()-numKeywords; i < keywords.size(); i++) {
 	    			for (int j = i + 1; j < keywords.size(); j++) {
@@ -427,13 +429,14 @@ public class KeywordAnalyzer {
 	    				Keyword temp_j = keywords.get(j);
 	    				if (temp_i.getFacet()[0].equals(temp_j.getFacet()[0])) {
 	    					if (temp_i.getTerm().length() >= temp_j.getTerm().length()) {
-	    						System.out.println(temp_i.getTerm() + " has the same facet as " + temp_j.getTerm() + " removing " + temp_j.getTerm());
+	    					//	System.out.println(temp_i.getTerm() + " has the same facet as " + temp_j.getTerm() + " removing " + temp_j.getTerm());
+	    					//	System.out.println("removed " + temp_j.getTerm());
 	    						keywords.remove(j);	    						
 	    						j--;
 	    						numKeywords--;
 	    					}
 	    					else {
-	    						System.out.println("removed " + temp_i.getTerm());
+	    					//	System.out.println("removed " + temp_i.getTerm());
 	    						keywords.remove(i);	    						
 	    						i--;
 	    						numKeywords--;
@@ -523,14 +526,18 @@ public class KeywordAnalyzer {
 		// check for repeated terms
 		if (visited.contains(cls.getIRI().toString()))
 		{
+			//System.err.println(cls.getIRI().toString() + " has already been used");
 			return false;
 		}
 		visited.add(cls.getIRI().toString());
-
-		// filter chemical entities that cause errors and any input less than 2
-		if (toUse.uri.contains("CHEBI") && t.getToken().length() <= 3) 
+		
+		if (toUse.uri.contains("CHEBI"))
 		{
-			return false;
+			// filter chemical entities that cause errors and any input less than 2
+			if (t.getToken().length() <= 3) 
+			{
+				return false;
+			}
 		}
 		if (t.getToken().length() <= 2)
 		{
