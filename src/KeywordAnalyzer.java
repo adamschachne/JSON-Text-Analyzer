@@ -25,7 +25,9 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import com.google.gson.Gson;
@@ -347,7 +349,8 @@ public class KeywordAnalyzer {
 	private ArrayList<Keyword> process2(String testInput, HashSet<String> visited) throws Exception {
         ArrayList<Keyword> keywords = new ArrayList<Keyword>();
         List<NLPHelper.NP> npList = nlpHelper.processText(testInput);
-        for (NLPHelper.NP np : npList) {
+        for (NLPHelper.NP np : npList) {       	
+        	
             Tokens tok = new Tokens(np.getText());
             tok.setStart(String.valueOf(np.getStart()));
             tok.setEnd(String.valueOf(np.getEnd()));
@@ -357,7 +360,6 @@ public class KeywordAnalyzer {
                 continue;
             }
             POS[] parts = np.getPosArr();  
-
             if (parts.length > 2) {
                 // try shorter phrases (IBO)
                 boolean found = false;    
@@ -376,7 +378,7 @@ public class KeywordAnalyzer {
                     if (processChunk(tempToken, keywords, visited) == true) {
                         found = true; 
                         numKeywords++;
-                    //    System.out.println("using: " + tempToken.getToken());
+                        //System.out.println("using: " + tempToken.getToken());
                         break;
                     }
                 }
@@ -398,7 +400,7 @@ public class KeywordAnalyzer {
                     tempToken.setToken(sb.toString().trim());
                     //System.out.println("trying: " + tempToken.getToken());
                     if (processChunk(tempToken, keywords, visited) == true) {
-                    //	System.out.println("using: " + tempToken.getToken());
+                    	//System.out.println("using: " + tempToken.getToken());
                     	numKeywords++;
                         found = true;
                         break;
@@ -414,9 +416,10 @@ public class KeywordAnalyzer {
                     Tokens tempToken = new Tokens(tok);
                     tempToken.setToken(p.token);
                     if (processChunk(tempToken, keywords, visited) == true) 
-                    {
+                    { 	
+                    	//System.out.println("here using: " + tempToken.getToken());
                     	numKeywords++;
-                            continue;
+                        continue;
                     }
                 }            	
             }
@@ -428,8 +431,7 @@ public class KeywordAnalyzer {
 	    				Keyword temp_i = keywords.get(i);
 	    				Keyword temp_j = keywords.get(j);
 	    				if (temp_i.getFacet()[0].equals(temp_j.getFacet()[0])) {
-	    					if (temp_i.getTerm().length() >= temp_j.getTerm().length()) {
-	    					//	System.out.println(temp_i.getTerm() + " has the same facet as " + temp_j.getTerm() + " removing " + temp_j.getTerm());
+	    					if (temp_i.getTerm().length() >= temp_j.getTerm().length()) {	    					
 	    					//	System.out.println("removed " + temp_j.getTerm());
 	    						keywords.remove(j);	    						
 	    						j--;
@@ -493,7 +495,12 @@ public class KeywordAnalyzer {
 				int tempDist = Levenshtein.distance(label, t.getToken());
 				//System.out.println(label + "   " + tempDist);
 				if (tempDist < 2) // within 2 changes away, add it to a consideration list 
-				{
+				{					
+					if (df.getOWLClass(IRI.create(conc.uri)).getSuperClasses(manager.getOntologies()).isEmpty())
+					{
+						// not an OWLClass, can skip
+						continue;
+					}
 					if (conc.uri.contains("obo/ENVO") || conc.uri.contains("cinergi_ontology/cinergi.owl")) 
 					{
 						consideringToUse.add(0, conc); // if its ENVO or cinergi at to beginning
@@ -520,7 +527,7 @@ public class KeywordAnalyzer {
 		{
 			return false;
 		}
-			
+
 		OWLClass cls = df.getOWLClass(IRI.create(toUse.uri));
 				
 		// check for repeated terms
