@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -61,7 +62,7 @@ public class Driver {
 		LinkedHashMap<String, IRI> exceptionMap = null; // Create this using label duplicates spreadsheet
 		
 		KeywordAnalyzer analyzer = new KeywordAnalyzer(manager, df, cinergi_ont, extensions, gson,
-					stoplist, exceptionMap, nullIRIs);	
+					stoplist, exceptionMap, nullIRIs, null);	
 	
 		analyzer.processDocuments(docs);
 			
@@ -69,5 +70,31 @@ public class Driver {
 		fw.write(gson.toJson(analyzer.getOutput())); 
 	
 		fw.close();
+	}
+
+	public static void doAnalyze(OWLOntologyManager manager, OWLDataFactory df, OWLOntology cinergi_ont,
+	    OWLOntology extensions, String jsonInput, String jsonOutput,
+	    List<String> stoplist, List<String> nullIRIs,
+	    LinkedHashMap<String, IRI> exceptionMap) throws IOException {
+		long start;// load documents
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		BufferedReader bufferedReader = new BufferedReader(new FileReader(jsonInput));
+		
+		Document[] docs = gson.fromJson(bufferedReader, Document[].class);
+		// for testing
+		docs = Arrays.copyOf(docs, 10);
+		start = System.currentTimeMillis();
+		KeywordAnalyzer analyzer = new KeywordAnalyzer(manager, df, cinergi_ont, extensions, gson,
+		stoplist, exceptionMap, nullIRIs, null);
+		
+		
+		analyzer.processDocuments(docs);
+		
+		FileWriter fw = new FileWriter(jsonOutput);
+		fw.write(gson.toJson(analyzer.getOutput()));
+		
+		fw.close();
+		long diff = System.currentTimeMillis() - start;
+		System.out.println("Elapsed time (msecs): " + diff);
 	}
 }
